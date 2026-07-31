@@ -7,10 +7,11 @@ use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\QueryException; // 🛠️ TAMBAHAN: Untuk menangkap error Foreign Key
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class Usercontroller extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,12 +24,12 @@ class Usercontroller extends Controller
         $users = User::whereRaw("MATCH(name,email) AGAINST(? IN BOOLEAN MODE)",[$keyword])
         ->paginate(10)
         ->withQueryString();
-       } else{
+       } else {
         $users = User::query()->paginate(10)->withQueryString();
        }
-         return view('users.index', compact('users'));
+
+       return view('users.index', compact('users'));
     }
-      
 
     /**
      * Show the form for creating a new resource.
@@ -70,7 +71,7 @@ class Usercontroller extends Controller
      */
     public function edit(User $user)
     {
-        $roles = role::all();
+        $roles = Role::all();
 
         return view('users.edit', compact('user', 'roles'));
     }
@@ -82,9 +83,9 @@ class Usercontroller extends Controller
     {
         $dataReq = $request->validated();
 
-        $user->name    =$dataReq['name'];
-        $user->email   =$dataReq['email'];
-        $user->role_id =$dataReq['role_id'];
+        $user->name    = $dataReq['name'];
+        $user->email   = $dataReq['email'];
+        $user->role_id = $dataReq['role_id'];
 
         if (!empty($dataReq['password'])) {
             $user->password = Hash::make($dataReq['password']);
@@ -100,8 +101,17 @@ class Usercontroller extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        try {
+            $user->delete();
 
-        return back()->with('success', 'User deleted');
+            return back()->with('success', 'User berhasil dihapus.');
+        } catch (QueryException $e) {
+            // 🛠️ PERBAIKAN: Jika error karena riwayat transaksi (SQLSTATE 23000)
+            if ($e->getCode() == 23000) {
+                return back()->with('error', 'Gagal menghapus! User/Kasir ini sudah memiliki riwayat transaksi.');
+            }
+
+            return back()->with('error', 'Terjadi kesalahan saat menghapus user.');
+        }
     }
 }

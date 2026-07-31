@@ -21,7 +21,7 @@
                 </p>
             </div>
             <div class="d-none d-md-block fs-1 opacity-75 me-3">
-                📊 🛒 ☕
+                📊 🛒 
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm py-2 mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm py-2 mb-4 sticky-top" style="z-index: 1020;">
     <div class="container-fluid px-3 px-md-4">
         
         {{-- Logo & Brand --}}
@@ -27,13 +27,15 @@
                     </a>
                 </li>
 
-                {{-- Users (Admin) --}}
+                {{-- 🔒 Users (Hanya muncul untuk Admin) --}}
+                @if(Auth::check() && Auth::user()->role && strtolower(Auth::user()->role->name) === 'admin')
                 <li class="nav-item">
                     <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('admin/users*') ? 'active bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary' }}" 
                        href="{{ route('admin.users') }}">
                         👥 <span>Kelola Kasir</span>
                     </a>
                 </li>
+                @endif
 
                 {{-- Stok Sepatu / Produk --}}
                 <li class="nav-item">

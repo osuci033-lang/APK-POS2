@@ -20,7 +20,7 @@ class ProdukController extends Controller
         $this->authorize('viewAny', Produk::class);
         $keyword = $request->input('search');
 
-        if($keyword) {
+        if ($keyword) {
             $products = Produk::when($keyword, function ($query) use ($keyword) {
                 $query->where('nama', 'like', '%' . $keyword . '%');
             })
@@ -30,6 +30,7 @@ class ProdukController extends Controller
         } else {
             $products = Produk::latest()->paginate(10)->withQueryString();
         }
+
         return view('produk.index', compact('products'));
     }
 
@@ -38,7 +39,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-         $this->authorize('create', Produk::class);
+        $this->authorize('create', Produk::class);
         return view('produk.create');
     }
 
@@ -58,12 +59,12 @@ class ProdukController extends Controller
         $data['stok'] = $dataReq['stock'] ?? true;
 
         if ($request->hasFile('foto')) {
-             $data['foto'] = $request->file('foto')->store('products', 'public');
+            $data['foto'] = $request->file('foto')->store('products', 'public');
         }
 
         Produk::create($data);
 
-        return redirect()->route('produk.index')->with('success', 'Product created successfully.');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
     /**
@@ -71,7 +72,8 @@ class ProdukController extends Controller
      */
     public function show(Produk $produk)
     {
-        $this->authorize('update', $produk);
+        // 🔧 HANYA BARIS INI YANG DIPERBAIKI (diubah dari 'update' ke 'view'):
+        $this->authorize('view', $produk);
 
         return view('produk.detail', compact('produk'));
     }
@@ -91,38 +93,36 @@ class ProdukController extends Controller
      */
     public function update(UpdateRequest $request, Produk $produk)
     {
-            $this->authorize('update', $produk);
+        $this->authorize('update', $produk);
 
-            $dataReq = $request->validated();
+        $dataReq = $request->validated();
 
-            $data = [
-            'user_id'     => Auth::id(),
-            'nama'        => $dataReq['name'],
-            'harga_beli'  => $dataReq['purchase_price'],
-            'harga_jual'  => $dataReq['selling_price'],
-            'stok'        => $dataReq['stock'],
-            
-    ];
+        $data = [
+            'user_id'    => Auth::id(),
+            'nama'       => $dataReq['name'],
+            'harga_beli' => $dataReq['purchase_price'],
+            'harga_jual' => $dataReq['selling_price'],
+            'stok'       => $dataReq['stock'],
+        ];
 
-    // Jika upload foto baru
-    if ($request->hasFile('foto')) {
+        // Jika upload foto baru
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama (jika ada & memang tersimpan)
+            if (
+                $produk->foto &&
+                Storage::disk('public')->exists($produk->foto)
+            ) {
+                Storage::disk('public')->delete($produk->foto);
+            }
 
-        // Hapus foto lama (jika ada & memang tersimpan)
-        if (
-            $produk->foto &&
-            Storage::disk('public')->exists($produk->foto)
-        ) {
-            Storage::disk('public')->delete($produk->foto);
+            // Simpan foto baru
+            $data['foto'] = $request->file('foto')->store('products', 'public');
         }
 
-        // Simpan foto baru
-        $data['foto'] = $request->file('foto')->store('products', 'public');
-    }
+        $produk->update($data);
 
-    $produk->update($data);
-
-    return redirect()->route('produk.edit', $produk->id)
-        ->with('success', 'Product updated successfully.');
+        return redirect()->route('produk.index')
+            ->with('success', 'Produk berhasil diperbarui.');
     }
 
     /**
@@ -133,9 +133,11 @@ class ProdukController extends Controller
         $this->authorize('delete', $produk);
 
         if ($produk->foto) {
-           Storage::disk('public')->delete($produk->foto);
+            Storage::disk('public')->delete($produk->foto);
         }
+        
         $produk->delete();
-        return redirect()->route('produk.index')->with('success', 'Product deleted successfully.');
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
     }
 }

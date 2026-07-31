@@ -135,9 +135,32 @@
                             {{-- Tombol Aksi --}}
                             <td class="text-center">
                                 <div class="d-flex justify-content-center align-items-center gap-1">
+                                    {{-- Tombol Detail (Selalu Tampil) --}}
                                     <a href="{{ route('penjualan.show', $sale) }}" class="btn btn-info btn-sm text-white fw-semibold rounded-3 px-2 shadow-sm">
                                         👁️ Detail
                                     </a>
+
+                                    {{-- Tombol Edit & Hapus Hanya Tampil Jika Status Belum Selesai (Pending/OPEN) --}}
+                                    @if(strtoupper($sale->status) !== 'COMPLETED')
+                                        {{-- Tombol Edit --}}
+                                        <a href="{{ route('penjualan.edit', $sale) }}" class="btn btn-warning btn-sm text-white fw-semibold rounded-3 px-2 shadow-sm">
+                                            ✏️ Edit
+                                        </a>
+
+                                        {{-- Tombol Hapus --}}
+                                        @can('delete', $sale)
+                                        <form action="{{ route('penjualan.destroy', $sale) }}" 
+                                              method="POST" 
+                                              onsubmit="return confirm('Yakin ingin menghapus transaksi ini?')"
+                                              class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm fw-semibold rounded-3 px-2 shadow-sm">
+                                                🗑️ Hapus
+                                            </button>
+                                        </form>
+                                        @endcan
+                                    @endif
                                 </div>
                             </td>
                         </tr>
