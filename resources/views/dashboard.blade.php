@@ -8,9 +8,9 @@
 
 <div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
 
-    {{-- Banner Ringkasan Hari Ini (Header Lucu & Cantik) --}}
+    {{-- Banner Ringkasan Hari Ini (Header Lucu & Cantik Pink) --}}
     <div class="card border-0 shadow-sm rounded-4 mb-4 text-white" 
-         style="background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);">
+         style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
         <div class="card-body p-4 d-flex justify-content-between align-items-center">
             <div>
                 <h2 class="fw-bold mb-1">
@@ -29,7 +29,7 @@
     @can('viewAny', App\Models\User::class)
     {{-- SECTION 1: TODAY'S SALES --}}
     <div class="d-flex align-items-center mb-3">
-        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+        <div class="rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background-color: #fce4ec; color: #d81b60;">
             <i class="bi bi-graph-up-arrow fw-bold"></i>
         </div>
         <h5 class="fw-bold text-dark mb-0">Today's Sales</h5>
@@ -42,9 +42,9 @@
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Total Nilai Penjualan Hari Ini</span>
-                        <h3 class="fw-bold text-primary mb-0">Rp {{ number_format($ringkasan['total_penjualan']) }}</h3>
+                        <h3 class="fw-bold mb-0" style="color: #d81b60;">Rp {{ number_format($ringkasan['total_penjualan']) }}</h3>
                     </div>
-                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <div class="rounded-circle p-3 fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: #fce4ec; color: #d81b60;">
                         💰
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Jumlah Transaksi Hari Ini</span>
-                        <h3 class="fw-bold text-info mb-0">{{ number_format($ringkasan['total_transaksi']) }} <span class="fs-6 text-muted fw-normal">Transaksi</span></h3>
+                        <h3 class="fw-bold mb-0" style="color: #e83e8c;">{{ number_format($ringkasan['total_transaksi']) }} <span class="fs-6 text-muted fw-normal">Transaksi</span></h3>
                     </div>
-                    <div class="bg-info bg-opacity-10 text-info rounded-circle p-3 fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <div class="rounded-circle p-3 fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: #f8bbd0; color: #ad1457;">
                         🧾
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
     {{-- SECTION 2: CASH & PAYMENT STATUS --}}
     <div class="d-flex align-items-center mb-3">
-        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+        <div class="rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background-color: #fce4ec; color: #d81b60;">
             <i class="bi bi-wallet2 fw-bold"></i>
         </div>
         <h5 class="fw-bold text-dark mb-0">Cash & Payment Status</h5>
@@ -110,7 +110,7 @@
 
     {{-- SECTION 3: CRITICAL INVENTORY STATUS --}}
     <div class="d-flex align-items-center mb-3">
-        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+        <div class="rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background-color: #fce4ec; color: #d81b60;">
             <i class="bi bi-box-seam fw-bold"></i>
         </div>
         <h5 class="fw-bold text-dark mb-0">Critical Inventory Status</h5>
@@ -210,7 +210,7 @@
 
     {{-- SECTION 4: BEST SELLER PRODUCTS --}}
     <div class="d-flex align-items-center mb-3">
-        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+        <div class="rounded-circle p-2 me-2 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px; background-color: #fce4ec; color: #d81b60;">
             <i class="bi bi-star-fill fw-bold"></i>
         </div>
         <h5 class="fw-bold text-dark mb-0">Best Seller Products</h5>
@@ -220,8 +220,8 @@
         <div class="col-md-12">
             <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
                 <div class="card-header bg-white border-0 pt-3 px-4 pb-0 d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold text-primary mb-0">🔥 Produk Paling Laris</h6>
-                    <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3">Top Sales</span>
+                    <h6 class="fw-bold mb-0" style="color: #d81b60;">🔥 Produk Paling Laris</h6>
+                    <span class="badge rounded-pill px-3" style="background-color: #fce4ec; color: #d81b60;">Top Sales</span>
                 </div>
                 <div class="card-body p-3">
                     <div class="table-responsive">
@@ -245,7 +245,7 @@
                                             </span>
                                         </td>
                                         <td class="text-end">
-                                            <span class="badge bg-primary rounded-pill px-3 py-2 fw-bold">
+                                            <span class="badge rounded-pill px-3 py-2 fw-bold" style="background-color: #ff758c; color: #ffffff;">
                                                 {{ number_format($produk->total_terjual) }}
                                             </span>
                                         </td>

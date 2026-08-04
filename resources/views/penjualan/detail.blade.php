@@ -10,17 +10,13 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8">
-            
-            {{-- Main Container Card --}}
-            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden">
-                
-                {{-- Header --}}
-                <div class="card-header bg-white border-bottom p-4 d-flex align-items-center justify-content-between">
+            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden" style="border: 1px solid #f8bbd0 !important;">
+                <div class="card-header bg-white p-4 d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #f8bbd0 !important;">
                     <div>
-                        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold mb-1 rounded-pill px-3 py-1" style="font-size: 0.75rem;">
+                        <span class="badge fw-bold mb-1 rounded-pill px-3 py-1 shadow-sm" style="background-color: #fce4ec; color: #d81b60; font-size: 0.75rem;">
                             🧾 Struk Transaksi
                         </span>
-                        <h5 class="fw-bold text-dark mb-0">
+                        <h5 class="fw-bold mb-0" style="color: #880e4f;">
                             Detail Penjualan 🛍️
                         </h5>
                     </div>
@@ -30,50 +26,44 @@
                 </div>
 
                 <div class="card-body p-4 p-md-5">
-                    
-                    {{-- Info Ringkasan Transaksi --}}
-                    <div class="row g-3 p-3 bg-light rounded-4 border mb-4">
+                    <div class="row g-3 p-3 rounded-4 mb-4 shadow-sm" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
                         <div class="col-sm-4 text-start">
-                            <small class="text-muted d-block small">Nama Kasir</small>
+                            <small class="d-block small" style="color: #ad1457;">Nama Kasir</small>
                             <span class="fw-bold text-dark">
                                 👤 {{ $sale->user->name }}
                             </span>
                         </div>
                         <div class="col-sm-4 text-start">
-                            <small class="text-muted d-block small">Tanggal Transaksi</small>
+                            <small class="d-block small" style="color: #ad1457;">Tanggal Transaksi</small>
                             <span class="fw-semibold text-secondary">
                                 🕒 {{ $sale->created_at->translatedFormat('d-m-Y H:i:s') }}
                             </span>
                         </div>
                         <div class="col-sm-4 text-start text-sm-end">
-                            <small class="text-muted d-block small">Total Pembayaran</small>
-                            <span class="fw-bold text-success fs-5">
+                            <small class="d-block small" style="color: #ad1457;">Total Pembayaran</small>
+                            <span class="fw-bold fs-5" style="color: #20c997;">
                                 Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
                             </span>
                         </div>
                     </div>
-
-                    {{-- Judul Tabel Item --}}
-                    <h6 class="fw-bold text-dark mb-3">
+                    <h6 class="fw-bold mb-3" style="color: #880e4f;">
                         🛍️ Daftar Barang yang Dibeli
                     </h6>
-
-                    {{-- Tabel Item Penjualan --}}
-                    <div class="table-responsive">
+                    <div class="table-responsive rounded-4 shadow-sm" style="border: 1px solid #f8bbd0;">
                         <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr class="text-secondary small">
+                            <thead style="background-color: #fce4ec;">
+                                <tr style="color: #880e4f;" class="small fw-bold">
                                     <th scope="col" class="py-3 text-center" style="width: 5%;">No</th>
                                     <th scope="col" class="py-3 text-center" style="width: 15%;">Foto</th>
                                     <th scope="col" class="py-3">Nama Produk</th>
-                                    <th scope="col" class="py-3 text-end" style="width: 25%;">Harga Jual</th>
+                                    <th scope="col" class="py-3 text-end pe-4" style="width: 25%;">Harga Jual</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1; ?>
                                 @foreach($sale->itempenjualan as $item)
-                                <tr>
-                                    <td class="text-center fw-bold text-muted">{{ $i++ }}</td>
+                                <tr style="border-bottom: 1px solid #fce4ec;">
+                                    <td class="text-center fw-bold" style="color: #d81b60;">{{ $i++ }}</td>
                                     
                                     {{-- Foto Produk --}}
                                     <td class="text-center">
@@ -81,10 +71,10 @@
                                             <img src="{{ asset('storage/' . $item->produk->foto) }}" 
                                                  alt="{{ $item->produk->nama }}" 
                                                  class="img-thumbnail rounded-3 shadow-sm" 
-                                                 style="width: 60px; height: 60px; object-fit: cover;">
+                                                 style="width: 60px; height: 60px; object-fit: cover; border-color: #f8bbd0;">
                                         @else
-                                            <div class="bg-light text-muted rounded-3 d-flex align-items-center justify-content-center mx-auto border"
-                                                 style="width: 60px; height: 60px; font-size: 0.7rem;">
+                                            <div class="text-muted rounded-3 d-flex align-items-center justify-content-center mx-auto border"
+                                                 style="width: 60px; height: 60px; font-size: 0.7rem; background-color: #fff0f5; border-color: #f8bbd0 !important;">
                                                 No Image
                                             </div>
                                         @endif
@@ -96,7 +86,7 @@
                                     </td>
 
                                     {{-- Harga Produk --}}
-                                    <td class="text-end fw-semibold text-success">
+                                    <td class="text-end fw-semibold pe-4" style="color: #20c997;">
                                         Rp {{ number_format($item->produk->harga_jual ?? 0, 0, ',', '.') }}
                                     </td>
                                 </tr>
@@ -107,9 +97,13 @@
 
                 </div>
 
-                {{-- Footer & Tombol Kembali --}}
-                <div class="card-footer bg-light border-top p-3 d-flex justify-content-between align-items-center">
-                    <a href="{{ route('penjualan.index') }}" class="btn btn-light fw-semibold px-4 rounded-3 border">
+                {{-- Footer & Tombol Kembali Pink Cute --}}
+                <div class="card-footer p-3 d-flex justify-content-between align-items-center" style="background-color: #fff0f5; border-top: 1px solid #f8bbd0 !important;">
+                    <a href="{{ route('penjualan.index') }}" 
+                       class="btn fw-semibold px-4 rounded-pill shadow-sm border-0"
+                       style="background-color: #fce4ec; color: #880e4f; transition: all 0.2s ease;"
+                       onmouseover="this.style.transform='scale(1.03)'; this.style.backgroundColor='#f8bbd0';" 
+                       onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#fce4ec';">
                         👈 Kembali ke Daftar Penjualan
                     </a>
                 </div>

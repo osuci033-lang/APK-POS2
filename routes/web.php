@@ -24,13 +24,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/users/edit/{user}', [UserController::class, 'edit'])->name('users.edit');
-        Route::post('/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+        
+        // 🛠️ PERBAIKAN DI SINI: Gunakan Route::match agar mendukung POST dan PUT!
+        Route::match(['post', 'put'], '/users/update/{user}', [UserController::class, 'update'])->name('users.update');
+        
         Route::delete('/users/destroy/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 
-        Route::middleware('role:admin,kasir')->group(function () {
+    Route::middleware('role:admin,kasir')->group(function () {
         Route::resource('/produk', ProdukController::class);
         Route::resource('/penjualan', PenjualanController::class);
         Route::resource('/itempenjualan', ItemPenjualanController::class);
-        });
     });
+});

@@ -4,7 +4,7 @@
         {{-- Logo & Brand --}}
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-dark" href="{{ route('dashboard') }}">
             <span class="fs-4">👟</span>
-            <span class="text-primary">SoleStation</span> POS
+            <span style="color: #e83e8c;">SoleStation</span> POS
         </a>
 
         {{-- Tombol Toggle Hamburger untuk HP --}}
@@ -20,7 +20,8 @@
                 
                 {{-- Dashboard --}}
                 <li class="nav-item">
-                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('dashboard') ? 'active bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary' }}" 
+                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('dashboard') ? 'active fw-bold' : 'text-secondary' }}" 
+                       style="{{ Request::is('dashboard') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        aria-current="page" 
                        href="{{ route('dashboard') }}">
                         📊 <span>Dashboard</span>
@@ -30,7 +31,8 @@
                 {{-- 🔒 Users (Hanya muncul untuk Admin) --}}
                 @if(Auth::check() && Auth::user()->role && strtolower(Auth::user()->role->name) === 'admin')
                 <li class="nav-item">
-                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('admin/users*') ? 'active bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary' }}" 
+                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('admin/users*') ? 'active fw-bold' : 'text-secondary' }}" 
+                       style="{{ Request::is('admin/users*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('admin.users') }}">
                         👥 <span>Kelola Kasir</span>
                     </a>
@@ -39,7 +41,8 @@
 
                 {{-- Stok Sepatu / Produk --}}
                 <li class="nav-item">
-                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('produk*') ? 'active bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary' }}" 
+                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('produk*') ? 'active fw-bold' : 'text-secondary' }}" 
+                       style="{{ Request::is('produk*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('produk.index') }}">
                         👟 <span>Katalog Sepatu</span>
                     </a>
@@ -47,7 +50,8 @@
 
                 {{-- Kasir / Transaksi Penjualan --}}
                 <li class="nav-item">
-                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('penjualan*') ? 'active bg-primary bg-opacity-10 text-primary fw-bold' : 'text-secondary' }}" 
+                    <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('penjualan*') ? 'active fw-bold' : 'text-secondary' }}" 
+                       style="{{ Request::is('penjualan*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('penjualan.index') }}">
                         🛒 <span>Kasir / Penjualan</span>
                     </a>
@@ -64,7 +68,7 @@
 
                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                     @csrf
-                    <button type="submit" class="btn btn-outline-danger btn-sm fw-bold px-3 py-2 rounded-3 shadow-sm d-flex align-items-center gap-1" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+                    <button type="submit" class="btn btn-sm fw-bold px-3 py-2 rounded-3 shadow-sm d-flex align-items-center gap-1" style="color: #d81b60; border-color: #f8bbd0; background-color: #fff0f5;" onclick="return confirm('Apakah Anda yakin ingin keluar?')">
                         🚪 <span>Logout</span>
                     </button>
                 </form>

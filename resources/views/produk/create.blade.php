@@ -10,21 +10,13 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7">
-            
-            {{-- Card Container --}}
             <div class="card border-0 shadow-sm rounded-4 bg-white p-4">
-                
-                {{-- Header Form --}}
-                <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
+                <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" style="border-color: #f8bbd0 !important;">
                     <div>
-                        <span class="badge bg-success bg-opacity-10 text-success fw-bold mb-1 rounded-pill px-3 py-1" style="font-size: 0.75rem;">
-                            ➕ Mode Tambah
-                        </span>
-                        <h5 class="fw-bold text-dark mb-0">
+                        <h5 class="fw-bold mb-0" style="color: #880e4f;">
                             Tambah Produk Sepatu Baru 👟
                         </h5>
                     </div>
-                    <div class="fs-3">📦</div>
                 </div>
 
                 {{-- Form Tambah (Menggunakan route store & method POST) --}}
