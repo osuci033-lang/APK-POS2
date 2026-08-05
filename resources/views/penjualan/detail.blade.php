@@ -11,17 +11,12 @@
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8">
             <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden" style="border: 1px solid #f8bbd0 !important;">
-                <div class="card-header bg-white p-4 d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #f8bbd0 !important;">
+                <div class="card-header p-4 text-white d-flex align-items-center justify-content-between border-0" 
+                     style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
                     <div>
-                        <span class="badge fw-bold mb-1 rounded-pill px-3 py-1 shadow-sm" style="background-color: #fce4ec; color: #d81b60; font-size: 0.75rem;">
-                            🧾 Struk Transaksi
-                        </span>
-                        <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                            Detail Penjualan 🛍️
+                        <h5 class="fw-bold mb-0 text-white">
+                            Detail Penjualan 
                         </h5>
-                    </div>
-                    <div class="fs-4">
-                        💳
                     </div>
                 </div>
 
@@ -30,13 +25,13 @@
                         <div class="col-sm-4 text-start">
                             <small class="d-block small" style="color: #ad1457;">Nama Kasir</small>
                             <span class="fw-bold text-dark">
-                                👤 {{ $sale->user->name }}
+                                {{ $sale->user->name }}
                             </span>
                         </div>
                         <div class="col-sm-4 text-start">
                             <small class="d-block small" style="color: #ad1457;">Tanggal Transaksi</small>
                             <span class="fw-semibold text-secondary">
-                                🕒 {{ $sale->created_at->translatedFormat('d-m-Y H:i:s') }}
+                                {{ $sale->created_at->translatedFormat('d-m-Y H:i:s') }}
                             </span>
                         </div>
                         <div class="col-sm-4 text-start text-sm-end">
@@ -46,8 +41,9 @@
                             </span>
                         </div>
                     </div>
+
                     <h6 class="fw-bold mb-3" style="color: #880e4f;">
-                        🛍️ Daftar Barang yang Dibeli
+                        Daftar Barang yang Dibeli
                     </h6>
                     <div class="table-responsive rounded-4 shadow-sm" style="border: 1px solid #f8bbd0;">
                         <table class="table table-hover align-middle mb-0">
@@ -104,7 +100,7 @@
                        style="background-color: #fce4ec; color: #880e4f; transition: all 0.2s ease;"
                        onmouseover="this.style.transform='scale(1.03)'; this.style.backgroundColor='#f8bbd0';" 
                        onmouseout="this.style.transform='scale(1)'; this.style.backgroundColor='#fce4ec';">
-                        👈 Kembali ke Daftar Penjualan
+                        Kembali ke Daftar Penjualan
                     </a>
                 </div>
 

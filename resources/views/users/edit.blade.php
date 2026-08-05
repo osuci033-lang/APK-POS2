@@ -17,15 +17,9 @@
                     {{-- Header Judul Kecil & Pas Selebar Form --}}
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
                         <div>
-                            <span class="badge fw-bold mb-1 rounded-pill px-3 py-1" style="font-size: 0.75rem; background-color: #fce4ec; color: #d81b60;">
-                                ✏️ Edit User
-                            </span>
                             <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                                Edit Data User 👤
+                                Edit Data User 
                             </h5>
-                        </div>
-                        <div class="fs-4">
-                            🛠️
                         </div>
                     </div>
 
@@ -41,9 +35,6 @@
                                     Nama <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fce4ec; color: #d81b60;">
-                                        👤
-                                    </span>
                                     <input type="text" 
                                            name="name" 
                                            class="form-control py-2 fst-italic @error('name') is-invalid @enderror rounded-end-3" 
@@ -88,9 +79,6 @@
                                     <small class="text-muted fw-normal">(Kosongkan jika tidak diubah)</small>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fce4ec; color: #d81b60;">
-                                        🔑
-                                    </span>
                                     <input type="password" 
                                            name="password" 
                                            class="form-control py-2 fst-italic @error('password') is-invalid @enderror rounded-end-3" 
@@ -110,14 +98,11 @@
                                     Role / Hak Akses <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fce4ec; color: #d81b60;">
-                                        🛡️
-                                    </span>
                                     <select name="role_id" class="form-select py-2 @error('role_id') is-invalid @enderror rounded-end-3" style="cursor: pointer; border-color: #f8bbd0; background-color: #fff0f5; color: #880e4f;">
                                         <option value="" disabled selected>-- Pilih Role --</option>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}" {{ old('role_id', $user->role_id ?? '') == $role->id ? 'selected' : '' }}>
-                                                ✨ {{ $role->name }}
+                                                 {{ $role->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -132,10 +117,10 @@
                             {{-- Tombol Aksi --}}
                             <div class="col-12 d-flex justify-content-end gap-2 pt-3 border-top mt-4">
                                 <a href="{{ route('admin.users') }}" class="btn btn-light fw-semibold px-4 rounded-3 border">
-                                    👈 Batal
+                                     Batal
                                 </a>
                                 <button type="submit" class="btn text-white fw-bold px-4 rounded-3 shadow-sm border-0" style="background-color: #d81b60;">
-                                    💾 Simpan Data
+                                     Simpan Data
                                 </button>
                             </div>
 

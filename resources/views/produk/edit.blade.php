@@ -17,15 +17,9 @@
                     {{-- Header Judul Kecil & Presisi --}}
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
                         <div>
-                            <span class="badge bg-warning bg-opacity-10 text-warning fw-bold mb-1 rounded-pill px-3 py-1" style="font-size: 0.75rem;">
-                                ✏️ Mode Edit
-                            </span>
                             <h5 class="fw-bold text-dark mb-0">
-                                Edit Data Produk 📦
+                                Edit Data Produk 
                             </h5>
-                        </div>
-                        <div class="fs-4">
-                            🛍️
                         </div>
                     </div>
 

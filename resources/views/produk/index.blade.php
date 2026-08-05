@@ -22,14 +22,11 @@
         <div class="card-body p-4 d-flex justify-content-between align-items-center">
             <div>
                 <h2 class="fw-bold mb-1">
-                    Katalog Sepatu 👟
+                    Katalog Sepatu 
                 </h2>
                 <p class="mb-0 opacity-75">
                     Daftar koleksi produk dan stok sepatu yang tersedia
                 </p>
-            </div>
-            <div class="d-none d-md-block fs-1 opacity-75 me-3">
-                 📦 🛍️
             </div>
         </div>
     </div>
@@ -45,7 +42,7 @@
                 <div class="col-12 col-md-auto">
                     @can('create', App\Models\Produk::class)
                         <a href="{{ route('produk.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none;">
-                            ✨ Create Produk Baru
+                            Create Produk Baru
                         </a>
                     @endcan
                 </div>
@@ -110,8 +107,6 @@
                             {{-- Informasi Produk --}}
                             <div class="card-body p-3 d-flex flex-column justify-content-between">
                                 <div>
-                                    {{-- Name & User --}}
-                                    <small class="text-muted d-block mb-1">👤 {{ $product->user->name }}</small>
                                     <h6 class="card-title fw-bold text-dark mb-2 text-truncate" title="{{ $product->nama }}">
                                         {{ $product->nama }}
                                     </h6>
@@ -131,7 +126,7 @@
                                        style="background-color: #e0f7fa; color: #006064; transition: all 0.2s ease;"
                                        onmouseover="this.style.transform='scale(1.05)'" 
                                        onmouseout="this.style.transform='scale(1)'">
-                                        👁️ <span>Detail</span>
+                                         <span>Detail</span>
                                     </a>
 
                                     {{-- Tombol Edit Soft Yellow Pastel --}}
@@ -141,7 +136,7 @@
                                            style="background-color: #fff3cd; color: #856404; transition: all 0.2s ease;"
                                            onmouseover="this.style.transform='scale(1.05)'" 
                                            onmouseout="this.style.transform='scale(1)'">
-                                            ✏️ <span>Edit</span>
+                                            <span>Edit</span>
                                         </a>
                                     @endcan
 
@@ -155,7 +150,7 @@
                                                     onmouseover="this.style.transform='scale(1.05)'" 
                                                     onmouseout="this.style.transform='scale(1)'"
                                                     onclick="return confirm('Apakah anda yakin akan menghapus produk ini?')">
-                                                🗑️
+                                                <span>Hapus</span>
                                             </button>
                                         </form>
                                     @endcan
@@ -167,7 +162,6 @@
                 @empty
                     <div class="col-12 w-100 text-center py-5">
                         <div class="text-muted">
-                            <div class="fs-1 mb-2">📦</div>
                             <h6 class="fw-bold mb-1">Data Produk Tidak Tersedia</h6>
                             <small>Belum ada barang yang ditambahkan atau hasil pencarian tidak ditemukan.</small>
                         </div>

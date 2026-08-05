@@ -13,11 +13,8 @@
             <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden" style="border: 1px solid #f8bbd0 !important;">
                 <div class="card-header bg-white p-4 d-flex align-items-center justify-content-between" style="border-bottom: 1px solid #f8bbd0 !important;">
                     <div>
-                        <span class="badge fw-bold mb-1 rounded-pill px-3 py-1 shadow-sm" style="background-color: #fce4ec; color: #d81b60; font-size: 0.75rem;">
-                            🔎 Information
-                        </span>
                         <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                            Detail Produk 🛍️
+                            Detail Produk 
                         </h5>
                     </div>
                 </div>
@@ -70,7 +67,7 @@
                                 <div class="col-6">
                                     <small class="text-muted d-block small">Stok Tersedia</small>
                                     <span class="badge fw-bold rounded-pill px-3 py-2 mt-1 shadow-sm" style="background-color: #e0f7fa; color: #006064;">
-                                        📦 {{ $produk->stok }} pcs
+                                         {{ $produk->stok }} pcs
                                     </span>
                                 </div>
                                 <div class="col-6">
@@ -92,7 +89,7 @@
                        style="background-color: #ffffff; color: #555; transition: all 0.2s ease;"
                        onmouseover="this.style.transform='scale(1.05)'" 
                        onmouseout="this.style.transform='scale(1)'">
-                        👈 <span>Kembali ke Daftar</span>
+                         <span>Kembali ke Daftar</span>
                     </a>
                     
                     @can('update', $produk)
@@ -101,7 +98,7 @@
                            style="background: linear-gradient(135deg, #ffc107 0%, #ffca28 100%); color: #333; transition: all 0.2s ease;"
                            onmouseover="this.style.transform='scale(1.05)'" 
                            onmouseout="this.style.transform='scale(1)'">
-                            ✏️ <span>Edit Produk</span>
+                             <span>Edit Produk</span>
                         </a>
                     @endcan
                 </div>

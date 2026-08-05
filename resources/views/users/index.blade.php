@@ -13,14 +13,11 @@
         <div class="card-body p-4 d-flex justify-content-between align-items-center">
             <div>
                 <h2 class="fw-bold mb-1">
-                    Halaman Users 👤
+                    Halaman Users 
                 </h2>
                 <p class="mb-0 opacity-75">
                     Daftar akun pengguna dan pengelola sistem POS
                 </p>
-            </div>
-            <div class="d-none d-md-block fs-1 opacity-75 me-3">
-                🔑 🛡️ 💼
             </div>
         </div>
     </div>
@@ -28,14 +25,14 @@
     {{-- Alert Notifikasi (Sukses / Error) --}}
     @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4" role="alert">
-            🎉 <strong>Berhasil!</strong> {{ session('success') }}
+             <strong>Berhasil!</strong> {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if(session('error'))
         <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4" role="alert">
-            ⚠️ <strong>Gagal!</strong> {{ session('error') }}
+             <strong>Gagal!</strong> {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
@@ -50,7 +47,7 @@
                 {{-- Tombol Tambah User --}}
                 <div class="col-12 col-md-auto">
                     <a href="{{ route('admin.users.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none; letter-spacing: 0.3px;">
-                        <i class="bi bi-person-plus-fill me-2 fs-5"></i> ✨ Create User Baru
+                        <i class="bi bi-person-plus-fill me-2 fs-5"></i>  Create User Baru
                     </a>
                 </div>
 
@@ -111,11 +108,11 @@
                             <td>
                                 @if(strtolower($user->role->name) == 'admin')
                                     <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm" style="background-color: #fce4ec; color: #d81b60; border: 1px solid #f8bbd0;">
-                                        👑 {{ $user->role->name }}
+                                         {{ $user->role->name }}
                                     </span>
                                 @else
                                     <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm" style="background-color: #fff0f5; color: #e83e8c; border: 1px solid #f8bbd0;">
-                                        🏷️ {{ $user->role->name }}
+                                         {{ $user->role->name }}
                                     </span>
                                 @endif
                             </td>
@@ -130,7 +127,7 @@
                                        style="background-color: #fff3cd; color: #856404; transition: all 0.2s ease;"
                                        onmouseover="this.style.transform='scale(1.05)'" 
                                        onmouseout="this.style.transform='scale(1)'">
-                                        ✏️ <span>Edit</span>
+                                         <span>Edit</span>
                                     </a>
 
                                     {{-- Tombol Hapus Soft Pastel Pink/Red --}}
@@ -142,7 +139,7 @@
                                                 onmouseover="this.style.transform='scale(1.05)'" 
                                                 onmouseout="this.style.transform='scale(1)'"
                                                 onclick="return confirm('Yakin hapus user ini?')">
-                                            🗑️ <span>Hapus</span>
+                                             <span>Hapus</span>
                                         </button>
                                     </form>
 

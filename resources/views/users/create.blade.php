@@ -18,14 +18,11 @@
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" style="border-color: #f8bbd0 !important;">
                         <div>
                             <span class="badge fw-bold mb-1 rounded-pill px-3 py-1 shadow-sm" style="background-color: #fce4ec; color: #d81b60; font-size: 0.75rem;">
-                                ➕ User Baru
+                                User Baru
                             </span>
                             <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                                Tambah User Baru 👤
+                                Tambah User Baru 
                             </h5>
-                        </div>
-                        <div class="fs-4">
-                            ✨
                         </div>
                     </div>
 
@@ -41,9 +38,6 @@
                                     Nama <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group shadow-sm rounded-3 overflow-hidden">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fff0f5; color: #d81b60; border-color: #f8bbd0;">
-                                        👤
-                                    </span>
                                     <input type="text" 
                                            name="name" 
                                            class="form-control py-2 fst-italic @error('name') is-invalid @enderror rounded-end-3" 
@@ -87,9 +81,6 @@
                                     Password <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group shadow-sm rounded-3 overflow-hidden">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fff0f5; color: #d81b60; border-color: #f8bbd0;">
-                                        🔑
-                                    </span>
                                     <input type="password" 
                                            name="password" 
                                            class="form-control py-2 fst-italic @error('password') is-invalid @enderror rounded-end-3" 
@@ -109,14 +100,12 @@
                                     Role / Hak Akses <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group shadow-sm rounded-3 overflow-hidden">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fff0f5; color: #d81b60; border-color: #f8bbd0;">
-                                        🛡️
-                                    </span>
+
                                     <select name="role_id" class="form-select py-2 @error('role_id') is-invalid @enderror rounded-end-3" style="cursor: pointer; border-color: #f8bbd0;">
                                         <option value="" disabled selected>-- Pilih Role --</option>
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
-                                                ✨ {{ $role->name }}
+                                                 {{ $role->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -137,7 +126,7 @@
                                    style="background-color: #f8d7da; color: #721c24; transition: all 0.2s ease;"
                                    onmouseover="this.style.transform='scale(1.05)'" 
                                    onmouseout="this.style.transform='scale(1)'">
-                                    👈 Batal
+                                     Batal
                                 </a>
 
                                 {{-- Tombol Simpan Gradient Pink --}}
@@ -146,7 +135,7 @@
                                         style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); transition: all 0.2s ease;"
                                         onmouseover="this.style.transform='scale(1.05)'" 
                                         onmouseout="this.style.transform='scale(1)'">
-                                    💾 Simpan Data
+                                     Simpan Data
                                 </button>
 
                             </div>
