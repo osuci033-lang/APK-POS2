@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kasir / Penjualan')
+@section('title', 'Penjualan')
 
 @section('content')
 
@@ -46,17 +46,17 @@
                         @if(isset($sale))
                             <input type="hidden" name="penjualan_id" value="{{ $sale->id }}">
                         @endif
-                        <div class="input-group shadow-sm rounded-pill overflow-hidden" style="border: 1px solid #f8bbd0;">
-                            <span class="input-group-text border-0 py-2 ps-3" style="background-color: #fff0f5; color: #d81b60;">
+                        <div class="input-group rounded-pill overflow-hidden" style="border: 1px solid #f8bbd0; background-color: #fff0f5;">
+                            <span class="input-group-text border-0 py-2 ps-3" style="background-color: transparent; color: #d81b60;">
                                 <i class="bi bi-search"></i>
                             </span>
                             <input type="text"
                                    id="inputSearchProduk"
                                    name="search"
                                    value="{{ request('search') }}"
-                                   class="form-control border-0 py-2"
-                                   style="background-color: #fff0f5; color: #880e4f;"
-                                   placeholder="Ketik nama produk (misal: adidas)..."
+                                   class="form-control border-0 py-2 shadow-none"
+                                   style="background-color: transparent; color: #880e4f; outline: none !important; box-shadow: none !important;"
+                                   placeholder="Cari produk berdasarkan nama..."
                                    autocomplete="off"
                                    autofocus>
                         </div>
@@ -226,7 +226,7 @@
                         </button>
                     </form>
 
-                    {{-- Tombol Batalkan Transaksi (PASTI MUNCUL) --}}
+                    {{-- Tombol Batalkan Transaksi --}}
                     <div class="pt-3 mt-3 border-top text-center" style="border-color: #fce4ec !important;">
                         <button type="button" 
                                 class="btn btn-outline-danger w-100 fw-bold rounded-pill py-2 shadow-sm"
@@ -280,10 +280,9 @@
         clearTimeout(timer);
         timer = setTimeout(function() {
             searchForm.submit();
-        }, 600); // Otomatis mencari setelah kasir selesai mengetik (jeda 0.6 detik) tanpa terpotong.
+        }, 600);
     });
 
-    // Mengembalikan fokus kursor ke input pencarian secara otomatis tanpa hilang
     window.onload = function() {
         if (inputSearch) {
             inputSearch.focus();

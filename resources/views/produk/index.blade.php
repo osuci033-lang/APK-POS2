@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Produk')
+@section('title', 'Produk')
 
 @section('content')
 
@@ -22,7 +22,7 @@
         <div class="card-body p-4 d-flex justify-content-between align-items-center">
             <div>
                 <h2 class="fw-bold mb-1">
-                    Katalog Sepatu 
+                    Produk 
                 </h2>
                 <p class="mb-0 opacity-75">
                     Daftar koleksi produk dan stok sepatu yang tersedia
@@ -37,12 +37,10 @@
             
             {{-- Action Row: Tombol Create & Search Form --}}
             <div class="row g-3 justify-content-between align-items-center mb-4">
-                
-                {{-- Tombol Tambah Produk Pink --}}
                 <div class="col-12 col-md-auto">
                     @can('create', App\Models\Produk::class)
                         <a href="{{ route('produk.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none;">
-                            Create Produk Baru
+                            Tambah Produk Baru
                         </a>
                     @endcan
                 </div>

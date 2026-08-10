@@ -41,8 +41,6 @@
 
                         {{-- Detail Informasi --}}
                         <div class="col-md-7">
-                            
-                            {{-- Nama Produk --}}
                             <div class="mb-3">
                                 <small class="text-uppercase fw-bold d-block mb-1" style="font-size: 0.7rem; letter-spacing: 0.5px; color: #d81b60;">Nama Produk</small>
                                 <h4 class="fw-bold text-dark mb-0">{{ $produk->nama }}</h4>

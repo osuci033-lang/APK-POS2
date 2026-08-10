@@ -14,7 +14,7 @@
 <div class="row g-3 mb-3">
     <div class="col-md-6">
         <div>
-            <label class="form-label fw-semibold text-dark small mb-1">Upload Gambar</label>
+            <label class="form-label fw-semibold text-dark small mb-1">Unggah Gambar</label>
             <input type="file" 
                    name="foto" 
                    onchange="previewImage(this)" 
@@ -39,7 +39,6 @@
     </div>
 </div>
 
-{{-- Nama Produk --}}
 <div class="mb-3">
     <label class="form-label fw-semibold text-dark small mb-1">Nama Produk <span class="text-danger">*</span></label>
     <input type="text" name="name"
@@ -53,7 +52,6 @@
     @enderror
 </div>
 
-{{-- Harga Beli --}}
 <div class="mb-3">
     <label class="form-label fw-semibold text-dark small mb-1">Harga Beli <span class="text-danger">*</span></label>
     <input type="number" name="purchase_price"
@@ -67,7 +65,6 @@
     @enderror
 </div>
 
-{{-- Harga Jual --}}
 <div class="mb-3">
     <label class="form-label fw-semibold text-dark small mb-1">Harga Jual <span class="text-danger">*</span></label>
     <input type="number" name="selling_price"
@@ -81,7 +78,6 @@
     @enderror
 </div>
 
-{{-- Stok --}}
 <div class="mb-4">
     <label class="form-label fw-semibold text-dark small mb-1">Jumlah Stok <span class="text-danger">*</span></label>
     <input type="number" name="stock"
@@ -95,7 +91,6 @@
     @enderror
 </div>
 
-{{-- Tombol Aksi --}}
 <div class="d-flex justify-content-end gap-2 pt-3 border-top" style="border-color: #f8bbd0 !important;">
     <a href="{{ route('produk.index') }}" 
        class="btn fw-semibold px-4 rounded-pill shadow-sm border-0" 

@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Pengguna')
 
 @section('content')
 
 @include('layouts.navbar')
 
 <div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
-
     <div class="card border-0 shadow-sm rounded-4 mb-4 text-white" 
          style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
         <div class="card-body p-4 d-flex justify-content-between align-items-center">
@@ -47,7 +46,7 @@
                 {{-- Tombol Tambah User --}}
                 <div class="col-12 col-md-auto">
                     <a href="{{ route('admin.users.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none; letter-spacing: 0.3px;">
-                        <i class="bi bi-person-plus-fill me-2 fs-5"></i>  Create User Baru
+                        <i class="bi bi-person-plus-fill me-2 fs-5"></i>  Tambah Pengguna Baru
                     </a>
                 </div>
 
@@ -127,7 +126,7 @@
                                        style="background-color: #fff3cd; color: #856404; transition: all 0.2s ease;"
                                        onmouseover="this.style.transform='scale(1.05)'" 
                                        onmouseout="this.style.transform='scale(1)'">
-                                         <span>Edit</span>
+                                        <span>Edit</span>
                                     </a>
 
                                     {{-- Tombol Hapus Soft Pastel Pink/Red --}}
@@ -139,7 +138,7 @@
                                                 onmouseover="this.style.transform='scale(1.05)'" 
                                                 onmouseout="this.style.transform='scale(1)'"
                                                 onclick="return confirm('Yakin hapus user ini?')">
-                                             <span>Hapus</span>
+                                            <span>Hapus</span>
                                         </button>
                                     </form>
 

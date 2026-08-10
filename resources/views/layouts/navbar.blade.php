@@ -25,7 +25,7 @@
                        style="{{ Request::is('dashboard') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        aria-current="page" 
                        href="{{ route('dashboard') }}">
-                         <span>Dashboard</span>
+                         <span>Beranda</span>
                     </a>
                 </li>
 
@@ -35,7 +35,7 @@
                     <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('admin/users*') ? 'active fw-bold' : 'text-secondary' }}" 
                        style="{{ Request::is('admin/users*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('admin.users') }}">
-                         <span>Kelola Kasir</span>
+                         <span>Pengguna</span>
                     </a>
                 </li>
                 @endif
@@ -45,7 +45,7 @@
                     <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('produk*') ? 'active fw-bold' : 'text-secondary' }}" 
                        style="{{ Request::is('produk*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('produk.index') }}">
-                         <span>Katalog Sepatu</span>
+                         <span>Produk</span>
                     </a>
                 </li>
 
@@ -54,7 +54,7 @@
                     <a class="nav-link px-3 rounded-3 text-dark d-flex align-items-center gap-1 {{ Request::is('penjualan*') ? 'active fw-bold' : 'text-secondary' }}" 
                        style="{{ Request::is('penjualan*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
                        href="{{ route('penjualan.index') }}">
-                         <span>Kasir / Penjualan</span>
+                         <span>Penjualan</span>
                     </a>
                 </li>
 
