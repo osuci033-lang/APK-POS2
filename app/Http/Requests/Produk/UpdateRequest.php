@@ -22,11 +22,11 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'           => 'required|string|max:255',
-            'purchase_price' => 'required|numeric|min:0',
-            'selling_price'  => 'required|numeric|min:0',
-            'stock'          => 'required|integer|min:0',
-            'foto'           => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'nama'       => 'required|string|max:255',
+            'harga_beli' => 'required|numeric|min:0',
+            'harga_jual' => 'required|numeric|min:0',
+            'stok'       => 'required|integer|min:0',
+            'foto'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 
@@ -36,15 +36,15 @@ class UpdateRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'           => 'Nama produk wajib diisi.',
-            'purchase_price.required' => 'Harga beli wajib diisi.',
-            'purchase_price.numeric'  => 'Harga beli harus berupa angka.',
-            'selling_price.required'  => 'Harga jual wajib diisi.',
-            'selling_price.numeric'   => 'Harga jual harus berupa angka.',
-            'stock.required'          => 'Stok wajib diisi.',
-            'stock.integer'           => 'Stok harus berupa angka bulat.',
-            'foto.image'              => 'File harus berupa gambar.',
-            'foto.max'                => 'Ukuran foto maksimal 2MB.',
+            'nama.required'       => 'Nama produk wajib diisi.',
+            'harga_beli.required' => 'Harga beli wajib diisi.',
+            'harga_beli.numeric'  => 'Harga beli harus berupa angka.',
+            'harga_jual.required' => 'Harga jual wajib diisi.',
+            'harga_jual.numeric'  => 'Harga jual harus berupa angka.',
+            'stok.required'       => 'Stok wajib diisi.',
+            'stok.integer'        => 'Stok harus berupa angka bulat.',
+            'foto.image'          => 'File harus berupa gambar.',
+            'foto.max'            => 'Ukuran foto maksimal 2MB.',
         ];
     }
 }

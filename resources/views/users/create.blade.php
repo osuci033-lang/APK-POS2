@@ -17,9 +17,6 @@
                     {{-- Header Judul Kecil & Pas Selebar Form --}}
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" style="border-color: #f8bbd0 !important;">
                         <div>
-                            <span class="badge fw-bold mb-1 rounded-pill px-3 py-1 shadow-sm" style="background-color: #fce4ec; color: #d81b60; font-size: 0.75rem;">
-                                User Baru
-                            </span>
                             <h5 class="fw-bold mb-0" style="color: #880e4f;">
                                 Tambah User Baru 
                             </h5>
@@ -58,9 +55,6 @@
                                     Email <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group shadow-sm rounded-3 overflow-hidden">
-                                    <span class="input-group-text border-end-0 rounded-start-3" style="background-color: #fff0f5; color: #d81b60; border-color: #f8bbd0;">
-                                        ✉️
-                                    </span>
                                     <input type="email" 
                                            name="email" 
                                            class="form-control py-2 fst-italic @error('email') is-invalid @enderror rounded-end-3" 

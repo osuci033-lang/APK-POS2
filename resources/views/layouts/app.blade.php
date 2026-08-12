@@ -2,27 +2,55 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Isi title yang kita kirimkan dari views lain -->
     <title>@yield('title')</title>
 
-    <!-- memanggil link bootstrap -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #ffffff !important;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container mt-3">
-
+    {{-- Menangkap semua jenis pesan session sukses --}}
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success auto-dismiss-alert shadow-sm border-0">
             {{ session('success') }}
         </div>
     @endif
 
-    <!-- Isi konten yang kita kirimkan dari views lain -->
-    @yield('content')
+    @if(session('status'))
+        <div class="alert alert-success auto-dismiss-alert shadow-sm border-0">
+            {{ session('status') }}
+        </div>
+    @endif
 
+    @yield('content')
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alerts = document.querySelectorAll('.alert-success, .auto-dismiss-alert');
+
+        alerts.forEach(function (alert) {
+            setTimeout(function () {
+                alert.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+                setTimeout(function () {
+                    alert.remove();
+                }, 600);
+            }, 5000);
+        });
+    });
+</script>
 
 </body>
 </html>

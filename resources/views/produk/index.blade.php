@@ -12,20 +12,22 @@
     }
     .product-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(255, 117, 140, 0.15) !important;
+        box-shadow: 0 10px 20px rgba(255, 178, 204, 0.3) !important;
     }
 </style>
 
 <div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
-    <div class="card border-0 shadow-sm rounded-4 mb-4 text-white" 
-         style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
-        <div class="card-body p-4 d-flex justify-content-between align-items-center">
+    
+    {{-- Banner Halaman Produk - Warna Presisi Sama Dengan Login (#ffb2cc) --}}
+    <div class="card border-0 shadow-sm mb-4 text-white position-relative overflow-hidden" 
+         style="background-color: #ffb2cc; border-radius: 20px;">
+        <div class="card-body p-4 p-md-5 d-flex justify-content-between align-items-center position-relative z-index-1">
             <div>
-                <h2 class="fw-bold mb-1">
-                    Produk 
+                <h2 class="fw-bold mb-1 text-white" style="letter-spacing: -0.5px;">
+                   Halaman Produk 
                 </h2>
-                <p class="mb-0 opacity-75">
-                    Daftar koleksi produk dan stok sepatu yang tersedia
+                <p class="mb-0 text-white opacity-90 fw-semibold">
+                   Daftar koleksi produk dan stok sepatu yang tersedia
                 </p>
             </div>
         </div>
@@ -39,7 +41,8 @@
             <div class="row g-3 justify-content-between align-items-center mb-4">
                 <div class="col-12 col-md-auto">
                     @can('create', App\Models\Produk::class)
-                        <a href="{{ route('produk.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none;">
+                        <a href="{{ route('produk.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white border-0" 
+                           style="background-color: #ffb2cc; letter-spacing: 0.3px; transition: all 0.2s ease;">
                             Tambah Produk Baru
                         </a>
                     @endcan
@@ -48,16 +51,16 @@
                 {{-- Form Pencarian Pink Border --}}
                 <div class="col-12 col-md-5 col-lg-4">
                     <form action="{{ route('produk.index') }}" method="GET">
-                        <div class="input-group shadow-sm rounded-pill overflow-hidden border" style="border-color: #f8bbd0 !important;">
+                        <div class="input-group shadow-sm rounded-pill overflow-hidden border" style="border-color: #ffe4e8 !important;">
                             <input
                                 type="text"
                                 name="search"
                                 value="{{ request('search') }}"
                                 class="form-control border-0 py-2 px-3 fst-italic"
                                 placeholder="Search nama produk..."
-                                style="font-size: 0.95rem; background-color: #fff0f5;"
+                                style="font-size: 0.95rem; background-color: #fff5f6;"
                             >
-                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #ff758c;">
+                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #ffb2cc;">
                                 🔍 Search
                             </button>
                         </div>
@@ -70,10 +73,10 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 @forelse ($products as $product)
                     <div class="col">
-                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden product-card bg-white" style="border: 1px solid #f8bbd0 !important;">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden product-card bg-white" style="border: 1px solid #ffd6e0 !important;">
                             
                             {{-- Area Foto Produk --}}
-                            <div class="position-relative text-center p-3 d-flex align-items-center justify-content-center" style="height: 220px; background-color: #fff0f5;">
+                            <div class="position-relative text-center p-3 d-flex align-items-center justify-content-center" style="height: 220px; background-color: #fff5f6;">
                                 @if($product->foto)
                                     <img src="{{ asset('storage/'.$product->foto) }}"
                                          alt="{{ $product->nama }}"
@@ -91,7 +94,7 @@
                                             Stok: {{ $product->stok }}
                                         </span>
                                     @elseif($product->stok > 0)
-                                        <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm" style="background-color: #ffc107; color: #000;">
+                                        <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm text-dark" style="background-color: #fff2a8;">
                                             Stok: {{ $product->stok }}
                                         </span>
                                     @else
@@ -116,7 +119,7 @@
                                 </div>
 
                                 {{-- Tombol Aksi Imut --}}
-                                <div class="d-flex justify-content-between align-items-center gap-1 pt-2 border-top" style="border-color: #f8bbd0 !important;">
+                                <div class="d-flex justify-content-between align-items-center gap-1 pt-2 border-top" style="border-color: #ffd6e0 !important;">
                                     
                                     {{-- Tombol Detail Soft Cyan Pastel --}}
                                     <a href="{{ route('produk.show', $product) }}" 
@@ -131,7 +134,7 @@
                                     @can('update', $product)
                                         <a href="{{ route('produk.edit', $product) }}" 
                                            class="btn btn-sm fw-bold rounded-pill flex-fill border-0 d-inline-flex justify-content-center align-items-center gap-1"
-                                           style="background-color: #fff3cd; color: #856404; transition: all 0.2s ease;"
+                                           style="background-color: #fff2a8; color: #7a5e00; transition: all 0.2s ease;"
                                            onmouseover="this.style.transform='scale(1.05)'" 
                                            onmouseout="this.style.transform='scale(1)'">
                                             <span>Edit</span>
@@ -144,7 +147,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm fw-bold rounded-pill w-100 border-0 d-inline-flex justify-content-center align-items-center gap-1" 
-                                                    style="background-color: #f8d7da; color: #721c24; transition: all 0.2s ease;"
+                                                    style="background-color: #ffd6e0; color: #800020; transition: all 0.2s ease;"
                                                     onmouseover="this.style.transform='scale(1.05)'" 
                                                     onmouseout="this.style.transform='scale(1)'"
                                                     onclick="return confirm('Apakah anda yakin akan menghapus produk ini?')">
@@ -165,11 +168,6 @@
                         </div>
                     </div>
                 @endforelse
-            </div>
-
-            {{-- Pagination --}}
-            <div class="d-flex justify-content-center mt-4 pt-3">
-                {{ $products->links() }}
             </div>
 
         </div>

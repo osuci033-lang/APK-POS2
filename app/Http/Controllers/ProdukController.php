@@ -12,51 +12,45 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(SearchRequest $request)
     {
         $this->authorize('viewAny', Produk::class);
         $keyword = $request->input('search');
 
         if ($keyword) {
+            // Menggunakan ->get() agar semua data hasil pencarian langsung tampil
             $products = Produk::when($keyword, function ($query) use ($keyword) {
-                $query->where('nama', 'like', '%' . $keyword . '%');
+                $query->where('nama', 'like', '%' . $keyword . '%')
+                      ->orWhere('jenis', 'like', '%' . $keyword . '%');
             })
             ->orderBy('nama')
-            ->paginate(10)
-            ->withQueryString();
+            ->get();
         } else {
-            $products = Produk::latest()->paginate(10)->withQueryString();
+            // Menggunakan ->get() agar semua produk tampil sekaligus tanpa halaman (1 2 dst)
+            $products = Produk::latest()->get();
         }
 
         return view('produk.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $this->authorize('create', Produk::class);
         return view('produk.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreRequest $request)
     {
         $this->authorize('create', Produk::class);
 
         $dataReq = $request->validated();
 
-        $data['user_id'] = Auth::id();
-        $data['nama'] = $dataReq['name'];
-        $data['harga_beli'] = $dataReq['purchase_price'];
-        $data['harga_jual'] = $dataReq['selling_price'];
-        $data['stok'] = $dataReq['stock'] ?? true;
+        $data['user_id']    = Auth::id();
+        $data['nama']       = $dataReq['nama'];
+        $data['jenis']      = $dataReq['jenis'] ?? 'Sneakers';
+        $data['harga_beli'] = $dataReq['harga_beli'];
+        $data['harga_jual'] = $dataReq['harga_jual'];
+        $data['stok']       = $dataReq['stok'];
 
         if ($request->hasFile('foto')) {
             $data['foto'] = $request->file('foto')->store('products', 'public');
@@ -67,30 +61,18 @@ class ProdukController extends Controller
         return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Produk $produk)
     {
-        // 🔧 HANYA BARIS INI YANG DIPERBAIKI (diubah dari 'update' ke 'view'):
         $this->authorize('view', $produk);
-
         return view('produk.detail', compact('produk'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Produk $produk)
     {
         $this->authorize('update', $produk);
-
         return view('produk.edit', compact('produk'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateRequest $request, Produk $produk)
     {
         $this->authorize('update', $produk);
@@ -99,35 +81,25 @@ class ProdukController extends Controller
 
         $data = [
             'user_id'    => Auth::id(),
-            'nama'       => $dataReq['name'],
-            'harga_beli' => $dataReq['purchase_price'],
-            'harga_jual' => $dataReq['selling_price'],
-            'stok'       => $dataReq['stock'],
+            'nama'       => $dataReq['nama'],
+            'jenis'      => $dataReq['jenis'] ?? $produk->jenis ?? 'Sneakers',
+            'harga_beli' => $dataReq['harga_beli'],
+            'harga_jual' => $dataReq['harga_jual'],
+            'stok'       => $dataReq['stok'],
         ];
 
-        // Jika upload foto baru
         if ($request->hasFile('foto')) {
-            // Hapus foto lama (jika ada & memang tersimpan)
-            if (
-                $produk->foto &&
-                Storage::disk('public')->exists($produk->foto)
-            ) {
+            if ($produk->foto && Storage::disk('public')->exists($produk->foto)) {
                 Storage::disk('public')->delete($produk->foto);
             }
-
-            // Simpan foto baru
             $data['foto'] = $request->file('foto')->store('products', 'public');
         }
 
         $produk->update($data);
 
-        return redirect()->route('produk.index')
-            ->with('success', 'Produk berhasil diperbarui.');
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Produk $produk)
     {
         $this->authorize('delete', $produk);

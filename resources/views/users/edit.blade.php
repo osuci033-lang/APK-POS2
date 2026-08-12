@@ -23,9 +23,10 @@
                         </div>
                     </div>
 
-                    {{-- Form Update (Murni Menerima POST) --}}
+                    {{-- Form Update --}}
                     <form action="{{ route('admin.users.update', $user) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         
                         <div class="row g-3">
     

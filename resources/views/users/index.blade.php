@@ -7,14 +7,16 @@
 @include('layouts.navbar')
 
 <div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
-    <div class="card border-0 shadow-sm rounded-4 mb-4 text-white" 
-         style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
-        <div class="card-body p-4 d-flex justify-content-between align-items-center">
+    
+    {{-- Banner Halaman Users - Menggunakan Warna Presisi Sama Dengan Login --}}
+    <div class="card border-0 shadow-sm mb-4 text-white position-relative overflow-hidden" 
+         style="background-color: #ffb2cc; border-radius: 20px;">
+        <div class="card-body p-4 p-md-5 d-flex justify-content-between align-items-center position-relative z-index-1">
             <div>
-                <h2 class="fw-bold mb-1">
+                <h2 class="fw-bold mb-1 text-white" style="letter-spacing: -0.5px;">
                     Halaman Users 
                 </h2>
-                <p class="mb-0 opacity-75">
+                <p class="mb-0 text-white opacity-90 fw-semibold">
                     Daftar akun pengguna dan pengelola sistem POS
                 </p>
             </div>
@@ -23,14 +25,14 @@
 
     {{-- Alert Notifikasi (Sukses / Error) --}}
     @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4" role="alert">
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
              <strong>Berhasil!</strong> {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-3 mb-4" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm rounded-4 mb-4" role="alert">
              <strong>Gagal!</strong> {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -45,24 +47,25 @@
                 
                 {{-- Tombol Tambah User --}}
                 <div class="col-12 col-md-auto">
-                    <a href="{{ route('admin.users.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%); border: none; letter-spacing: 0.3px;">
-                        <i class="bi bi-person-plus-fill me-2 fs-5"></i>  Tambah Pengguna Baru
+                    <a href="{{ route('admin.users.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white border-0" 
+                       style="background-color: #ffb2cc; letter-spacing: 0.3px; transition: all 0.2s ease;">
+                        <i class="bi bi-person-plus-fill me-2 fs-5"></i> Tambah Pengguna Baru
                     </a>
                 </div>
 
                 {{-- Form Pencarian --}}
                 <div class="col-12 col-md-5 col-lg-4">
                     <form action="{{ route('admin.users') }}" method="GET">
-                        <div class="input-group shadow-sm rounded-pill overflow-hidden border" style="border-color: #f8bbd0 !important;">
+                        <div class="input-group shadow-sm rounded-pill overflow-hidden border" style="border-color: #ffe4e8 !important;">
                             <input
                                 type="text"
                                 name="search"
                                 value="{{ request('search') }}"
                                 class="form-control border-0 py-2 px-3 fst-italic"
                                 placeholder="Search username or email..."
-                                style="font-size: 0.95rem; background-color: #fff0f5;"
+                                style="font-size: 0.95rem; background-color: #fff5f6;"
                             >
-                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #ff758c;">
+                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #ffb2cc;">
                                 🔍 Search
                             </button>
                         </div>
@@ -91,7 +94,8 @@
                             {{-- Name dengan Inisial Avatar Bulat Pink --}}
                             <td class="fw-semibold text-dark">
                                 <div class="d-flex align-items-center">
-                                    <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold shadow-sm" style="width: 38px; height: 38px; font-size: 0.95rem; background-color: #fce4ec; color: #d81b60; border: 2px solid #f8bbd0;">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold shadow-sm" 
+                                         style="width: 38px; height: 38px; font-size: 0.95rem; background-color: #ffe4e8; color: #d81b60; border: 2px solid #ffd6e0;">
                                         {{ strtoupper(substr($user->name, 0, 1)) }}
                                     </div>
                                     <div>
@@ -103,38 +107,32 @@
                             {{-- Email --}}
                             <td class="text-secondary">{{ $user->email }}</td>
 
-                            {{-- Role dengan Badge Warna Imut --}}
+                            {{-- Role Teks Pink --}}
                             <td>
-                                @if(strtolower($user->role->name) == 'admin')
-                                    <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm" style="background-color: #fce4ec; color: #d81b60; border: 1px solid #f8bbd0;">
-                                         {{ $user->role->name }}
-                                    </span>
-                                @else
-                                    <span class="badge fw-bold rounded-pill px-3 py-2 shadow-sm" style="background-color: #fff0f5; color: #e83e8c; border: 1px solid #f8bbd0;">
-                                         {{ $user->role->name }}
-                                    </span>
-                                @endif
+                                <span class="fw-semibold text-capitalize" style="color: #d81b60;">
+                                    {{ $user->role->name }}
+                                </span>
                             </td>
 
-                            {{-- Tombol Aksi (Super Cantik & Cutie) --}}
+                            {{-- Tombol Aksi --}}
                             <td class="text-center">
                                 <div class="d-flex justify-content-center align-items-center gap-2">
                                     
-                                    {{-- Tombol Edit Soft Pastel Yellow/Peach --}}
+                                    {{-- Tombol Edit Soft Pastel Yellow --}}
                                     <a href="{{ route('admin.users.edit', $user->id) }}" 
                                        class="btn btn-sm fw-bold rounded-pill px-3 py-1 shadow-sm border-0 d-inline-flex align-items-center gap-1" 
-                                       style="background-color: #fff3cd; color: #856404; transition: all 0.2s ease;"
+                                       style="background-color: #fff2a8; color: #7a5e00; transition: all 0.2s ease;"
                                        onmouseover="this.style.transform='scale(1.05)'" 
                                        onmouseout="this.style.transform='scale(1)'">
                                         <span>Edit</span>
                                     </a>
 
-                                    {{-- Tombol Hapus Soft Pastel Pink/Red --}}
+                                    {{-- Tombol Hapus Soft Pastel Pink --}}
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm fw-bold rounded-pill px-3 py-1 shadow-sm border-0 d-inline-flex align-items-center gap-1" 
-                                                style="background-color: #f8d7da; color: #721c24; transition: all 0.2s ease;"
+                                                style="background-color: #ffd6e0; color: #800020; transition: all 0.2s ease;"
                                                 onmouseover="this.style.transform='scale(1.05)'" 
                                                 onmouseout="this.style.transform='scale(1)'"
                                                 onclick="return confirm('Yakin hapus user ini?')">

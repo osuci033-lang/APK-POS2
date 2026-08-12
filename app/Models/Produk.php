@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
 class Produk extends Model
 {
     use HasFactory;
@@ -16,6 +15,7 @@ class Produk extends Model
         'user_id',
         'foto',
         'nama',
+        'jenis', // <-- DITAMBAHKAN AGAR BISA DISIMPAN
         'harga_beli',
         'harga_jual',
         'stok'
@@ -25,6 +25,7 @@ class Produk extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     public function itemPenjualan()
     {
         return $this->hasMany(ItemPenjualan::class, 'produk_id');
