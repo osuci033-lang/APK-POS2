@@ -3,20 +3,26 @@
 @section('title', 'Tentang') 
 
 @section('content')
+
+@include('layouts.navbar')
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-11 col-xl-10">
-            <div class="card border-0 shadow-lg rounded-4 overflow-hidden" style="border: 1px solid #ffd6e0 !important;">
-                <div class="row g-0">
+            <!-- Tambahkan h-100 di sini agar card menyesuaikan tinggi konten -->
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden h-100" style="border: 1px solid #ffd6e0 !important;">
+                <!-- Tambahkan align-items-stretch agar kedua kolom di dalam row tingginya sama rata -->
+                <div class="row g-0 align-items-stretch">
                     
                     {{-- Sisi Kiri - Profil (Warna Pink Presisi #ffb2cc) --}}
                     <div class="col-md-5 p-4 p-lg-5 text-center text-white d-flex flex-column justify-content-between position-relative" style="background-color: #ffb2cc;">
                         <div>
-                            {{-- Icon Inisial --}}
                             <div class="position-relative d-inline-block mt-2 mb-3">
-                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm" 
-                                     style="width: 100px; height: 100px; background-color: #ffffff; color: #d81b60; border: 4px solid rgba(255, 255, 255, 0.6);">
-                                    <span class="fw-bold fs-2">SP</span>
+                                <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm overflow-hidden" 
+                                     style="width: 100px; height: 100px; background-color: #ffffff; border: 4px solid rgba(255, 255, 255, 0.6);">
+                                    
+                                    <img src="{{ asset('images/foto.jpg') }}" alt="Foto Profil" class="w-100 h-100 object-fit-cover">
+                                    
                                 </div>
                             </div>
                             
@@ -100,12 +106,6 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="p-2 rounded-3 border d-flex align-items-center gap-2" style="background-color: #ffffff; border-color: #ffd6e0 !important;">
-                                            <span class="p-1 rounded bg-light">📊</span>
-                                            <span class="small text-dark fw-medium" style="font-size: 0.8rem;">Laporan Penjualan</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="p-2 rounded-3 border d-flex align-items-center gap-2" style="background-color: #ffffff; border-color: #ffd6e0 !important;">
                                             <span class="p-1 rounded bg-light">👥</span>
                                             <span class="small text-dark fw-medium" style="font-size: 0.8rem;">Multi-User (Admin/Kasir)</span>
                                         </div>
@@ -162,17 +162,6 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-
-                        {{-- Tombol Kembali (Presisi #ffb2cc) --}}
-                        <div class="pt-3 border-top d-flex justify-content-end mt-3" style="border-color: #ffe4e8 !important;">
-                            <a href="{{ route('dashboard') }}" 
-                               class="btn fw-bold px-4 py-2 rounded-pill shadow-sm border-0 text-white d-flex align-items-center gap-2" 
-                               style="background-color: #ffb2cc; transition: all 0.2s ease;"
-                               onmouseover="this.style.transform='scale(1.03)'" 
-                               onmouseout="this.style.transform='scale(1)'">
-                                <span>←</span> Kembali
-                            </a>
                         </div>
 
                     </div>

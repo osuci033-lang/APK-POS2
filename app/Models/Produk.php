@@ -15,7 +15,7 @@ class Produk extends Model
         'user_id',
         'foto',
         'nama',
-        'jenis', // <-- DITAMBAHKAN AGAR BISA DISIMPAN
+        'jenis', 
         'harga_beli',
         'harga_jual',
         'stok'

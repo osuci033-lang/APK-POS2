@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('produk', function (Blueprint $table) {
-            // Menambahkan kolom 'jenis' setelah kolom 'nama'
             $table->string('jenis')->nullable()->after('nama');
         });
     }
@@ -23,7 +22,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('produk', function (Blueprint $table) {
-            // Menghapus kolom 'jenis' jika migration di-rollback
             $table->dropColumn('jenis');
         });
     }
