@@ -18,7 +18,8 @@
 </head>
 <body>
 
-<div class="container mt-3">
+{{-- Menggunakan container-fluid agar melebar full screen dan px-4 untuk jarak aman di sisi kiri-kanan --}}
+<div class="container-fluid px-4 mt-3">
     {{-- Menangkap semua jenis pesan session sukses --}}
     @if(session('success'))
         <div class="alert alert-success auto-dismiss-alert shadow-sm border-0">

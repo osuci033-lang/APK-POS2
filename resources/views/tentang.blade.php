@@ -21,7 +21,7 @@
                                 <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm overflow-hidden" 
                                      style="width: 100px; height: 100px; background-color: #ffffff; border: 4px solid rgba(255, 255, 255, 0.6);">
                                     
-                                    <img src="{{ asset('images/foto.jpg') }}" alt="Foto Profil" class="w-100 h-100 object-fit-cover">
+                                    <img src="{{ asset('images/foto.jpeg') }}" alt="Foto Profil" class="w-100 h-100 object-fit-cover">
                                     
                                 </div>
                             </div>
