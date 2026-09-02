@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah User')
+@section('title', 'Tambah Pengguna')
 
 @section('content')
 
@@ -18,12 +18,12 @@
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" style="border-color: #f8bbd0 !important;">
                         <div>
                             <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                                Tambah User Baru 
+                                Tambah Pengguna Baru 
                             </h5>
                         </div>
                     </div>
 
-                    {{-- Form Tambah User --}}
+                    {{-- Form Tambah Pengguna --}}
                     <form action="{{ route('admin.users.store') }}" method="POST">
                         @csrf
                         
