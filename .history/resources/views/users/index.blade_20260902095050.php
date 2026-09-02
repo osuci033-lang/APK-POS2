@@ -14,7 +14,7 @@
         <div class="card-body p-4 p-md-5 d-flex justify-content-between align-items-center position-relative z-index-1">
             <div>
                 <h2 class="fw-bold mb-1 text-white" style="letter-spacing: -0.5px;">
-                    Halaman Pengguna 
+                    Halaman Users 
                 </h2>
                 <p class="mb-0 text-white opacity-90 fw-semibold">
                     Daftar akun pengguna dan pengelola sistem POS
