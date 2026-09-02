@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit User')
+@section('title', 'Edit Pengguna')
 
 @section('content')
 
@@ -18,7 +18,7 @@
                     <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom">
                         <div>
                             <h5 class="fw-bold mb-0" style="color: #880e4f;">
-                                Edit Data User 
+                                Edit Data Pengguna
                             </h5>
                         </div>
                     </div>
