@@ -33,15 +33,6 @@
     {{-- Banner Halaman Produk - Menggunakan Warna Presisi Sama Dengan Ringkasan Hari Ini & Efek Glassmorphism --}}
     <div class="card border-0 shadow-sm mb-4 position-relative overflow-hidden rounded-4" 
          style="background: linear-gradient(135deg, rgba(255, 182, 193, 0.65) 0%, rgba(248, 187, 208, 0.75) 100%); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.8) !important;">
-        
-        {{-- Hiasan Kecil ala Kucing di Pojok Banner --}}
-        <div class="position-absolute" style="top: 15px; right: 20px; opacity: 0.8;">
-            <div class="d-flex gap-1">
-                <div style="width: 10px; height: 10px; background-color: #ffe082; border-radius: 2px;"></div>
-                <div style="width: 12px; height: 12px; background-color: #ffd54f; border-radius: 2px;"></div>
-            </div>
-        </div>
-
         <div class="card-body p-4 p-md-5 d-flex justify-content-between align-items-center position-relative z-index-1">
             <div>
                 <h1 class="fw-bold mb-2" style="color: #880e4f; font-family: 'Comic Sans MS', 'Bubblegum Sans', cursive, sans-serif; letter-spacing: 0.5px; font-size: 2.2rem;">

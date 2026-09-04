@@ -6,32 +6,18 @@
 
 @include('layouts.navbar')
 
-<style>
-    /* Mengatur body agar full background grid pink kucing tanpa batas putih */
-    html, body {
-        height: 100% !important;
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background-color: #fff0f5 !important;
-        background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px), linear-gradient(0deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px) !important;
-        background-size: 40px 40px !important;
-        overflow-x: hidden !important;
-    }
-</style>
-
-<div class="container-fluid py-4 px-3 px-md-4 min-vh-100" style="background-color: transparent !important;">
+<div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
     
-    {{-- Banner Halaman Users - Menggunakan Warna Presisi Sama Dengan Halaman Produk & Efek Glassmorphism --}}
-    <div class="card border-0 shadow-sm mb-4 position-relative overflow-hidden rounded-4" 
-         style="background: linear-gradient(135deg, rgba(255, 182, 193, 0.65) 0%, rgba(248, 187, 208, 0.75) 100%); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.8) !important;">
+    {{-- Banner Halaman Users - Menggunakan Warna Presisi Sama Dengan Login --}}
+    <div class="card border-0 shadow-sm mb-4 text-white position-relative overflow-hidden" 
+         style="background-color: #ffb2cc; border-radius: 20px;">
         <div class="card-body p-4 p-md-5 d-flex justify-content-between align-items-center position-relative z-index-1">
             <div>
-                <h1 class="fw-bold mb-2" style="color: #880e4f; font-family: 'Comic Sans MS', 'Bubblegum Sans', cursive, sans-serif; letter-spacing: 0.5px; font-size: 2.2rem;">
-                    Halaman Pengguna
-                </h1>
-                <p class="mb-0 fw-semibold" style="color: #880e4f; opacity: 0.85; font-size: 1.05rem;">
-                   Daftar akun pengguna dan pengelola sistem POS
+                <h2 class="fw-bold mb-1 text-white" style="letter-spacing: -0.5px;">
+                    Halaman Pengguna 
+                </h2>
+                <p class="mb-0 text-white opacity-90 fw-semibold">
+                    Daftar akun pengguna dan pengelola sistem POS
                 </p>
             </div>
         </div>
@@ -62,8 +48,8 @@
                 {{-- Tombol Tambah User --}}
                 <div class="col-12 col-md-auto">
                     <a href="{{ route('admin.users.create') }}" class="btn fw-bold px-4 py-2 rounded-pill shadow-sm d-inline-flex align-items-center text-white border-0" 
-                       style="background-color: #d81b60; letter-spacing: 0.3px; transition: all 0.2s ease;">
-                         <i class="bi bi-person-plus-fill me-2 fs-5"></i> Tambah Pengguna Baru
+                       style="background-color: #ffb2cc; letter-spacing: 0.3px; transition: all 0.2s ease;">
+                        <i class="bi bi-person-plus-fill me-2 fs-5"></i> Tambah Pengguna Baru
                     </a>
                 </div>
 
@@ -79,7 +65,7 @@
                                 placeholder="Search username or email..."
                                 style="font-size: 0.95rem; background-color: #fff5f6;"
                             >
-                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #d81b60;">
+                            <button class="btn fw-semibold text-white px-4 border-0" type="submit" style="background-color: #ffb2cc;">
                                 🔍 Search
                             </button>
                         </div>
@@ -92,7 +78,7 @@
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
-                        <tr class="small" style="color: #880e4f;">
+                        <tr class="text-secondary small">
                             <th scope="col" class="py-3" style="width: 5%;">#</th>
                             <th scope="col" class="py-3">Name</th>
                             <th scope="col" class="py-3">Email</th>
@@ -103,7 +89,7 @@
                     <tbody>
                         @foreach ($users as $user)
                         <tr>
-                            <td class="fw-bold" style="color: #880e4f;">{{ $users->firstItem() + $loop->index }}</td>
+                            <td class="fw-bold text-muted">{{ $users->firstItem() + $loop->index }}</td>
                             
                             {{-- Name dengan Inisial Avatar Bulat Pink --}}
                             <td class="fw-semibold text-dark">
