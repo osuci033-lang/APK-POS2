@@ -12,28 +12,22 @@
         padding: 0 !important;
         overflow-x: hidden !important;
     }
-
-    /* Menghilangkan margin bawaan container layout utama */
     main, #app, .container-fluid, div[class*="container"] {
         padding: 0 !important;
         margin: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
     }
-
-    /* Menghilangkan garis biru Bootstrap saat input diklik & memberi border pink soft */
     .custom-input:focus {
         box-shadow: none !important;
         outline: none !important;
     }
-
     .custom-group:focus-within {
         border: 2px solid #f48fb1 !important;
         box-shadow: 0 0 8px rgba(244, 143, 177, 0.4) !important;
     }
 </style>
 
-{{-- Container Background Full Screen dengan Motif Kotak-Kotak (Grid/Plaid) ala Referensi Kucing --}}
 <div class="d-flex align-items-center justify-content-center w-100 min-vh-100" 
      style="background-color: #fff0f5; background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px), linear-gradient(0deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px); background-size: 40px 40px; margin: 0; padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;">
     
@@ -41,7 +35,7 @@
         <div class="row justify-content-center">
             <div class="col-11 col-sm-8 col-md-5 col-lg-4 position-relative">
                 
-                {{-- Ilustrasi Kucing Hiasan di Atas Kiri Tulisan Login --}}
+                {{-- Ilustrasi Kucing Hiasan --}}
                 <div class="position-absolute" style="top: -35px; left: 15px; z-index: 20;">
                     <svg width="65" height="50" viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 45C5 45 2 30 10 20C15 14 22 18 20 25C18 32 12 35 15 45Z" fill="white" stroke="#d8b4bc" stroke-width="3"/>
@@ -56,30 +50,25 @@
                     </svg>
                 </div>
 
-                {{-- Hiasan Kotak-Kotak Kuning Kecil di Atas Kanan --}}
                 <div class="position-absolute d-flex gap-1" style="top: -15px; right: 25px; z-index: 20; transform: rotate(15deg);">
                     <div style="width: 12px; height: 12px; background-color: #ffe082; border: 1.5px solid #ffca28; border-radius: 3px;"></div>
                     <div style="width: 14px; height: 14px; background-color: #ffd54f; border: 1.5px solid #ffb300; border-radius: 3px;"></div>
                     <div style="width: 16px; height: 16px; background-color: #ffca28; border: 1.5px solid #ffa000; border-radius: 3px;"></div>
                 </div>
 
-                {{-- Card Transparan Glassmorphism Tanpa Lingkaran Avatar Atas --}}
                 <div class="card border-0 rounded-4 shadow-sm overflow-hidden mt-4 pt-2" 
                      style="background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(12px); border: 2px solid rgba(255, 255, 255, 0.9) !important;">
 
                     <div class="card-body p-4 p-sm-5 text-center">
                         
-                        {{-- Header / Title Teks "LOGIN" Tebal 3D ala Referensi --}}
                         <div class="mt-2 mb-4">
-                            <h1 class="fw-bolder mb-1" style="color: #ff69b4; font-size: 2.75rem; font-family: 'Comic Sans MS', 'Bubblegum Sans', cursive, sans-serif; text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 105, 180, 0.3); letter-spacing: 2px;">LOGIN</h1>
+                            <h1 class="fw-bolder mb-1" style="color: #ff69b4; font-size: 2.75rem; font-family: 'Comic Sans MS', cursive, sans-serif; text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 105, 180, 0.3); letter-spacing: 2px;">LOGIN</h1>
                             <p class="text-muted small mb-0" style="font-size: 0.8rem;">Masuk ke akun Anda untuk mulai bertransaksi</p>
                         </div>
 
-                        {{-- Form Login --}}
                         <form action="{{ route('auth') }}" method="POST">
                             @csrf
 
-                            {{-- Input Email --}}
                             <div class="mb-3 text-start">
                                 <div class="input-group custom-group shadow-sm rounded-pill overflow-hidden align-items-center" style="background-color: #ffffff; border: 1.5px solid #f8bbd0; padding: 4px 12px;">
                                     <span class="input-group-text border-0 pe-2 bg-transparent" style="color: #d8b4bc;">
@@ -102,10 +91,7 @@
                                 @enderror
                             </div>
 
-                            {{-- Input Password dengan Hiasan Kucing Mengintip di Atas Kanan Kotak Password --}}
                             <div class="mb-4 text-start position-relative">
-                                
-                                {{-- Kucing Mengintip (Peek) di Atas Kotak Password --}}
                                 <div class="position-absolute" style="top: -22px; right: 20px; z-index: 25;">
                                     <svg width="40" height="25" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M5 30C5 15 15 10 25 10C35 10 45 15 45 30H5Z" fill="white" stroke="#d8b4bc" stroke-width="2.5"/>
@@ -140,15 +126,12 @@
                                     <div class="invalid-feedback d-block mt-1 small text-danger fw-semibold">
                                         {{ $message }}
                                     </div>
-                                @enderror       
+                                @enderror     
                             </div>
 
-                            {{-- Tombol Login Rounded Pill Sesuai Referensi --}}
                             <button type="submit" 
                                     class="btn btn-lg w-100 fw-bold shadow-sm rounded-pill py-2 text-white border-0 mt-2" 
-                                    style="letter-spacing: 0.5px; background-color: #d88ca0; font-size: 0.95rem;"
-                                    onmouseover="this.style.backgroundColor='#c5788d';"
-                                    onmouseout="this.style.backgroundColor='#d88ca0';">
+                                    style="letter-spacing: 0.5px; background-color: #d88ca0; font-size: 0.95rem;">
                                 MASUK SEKARANG
                             </button>
                         </form>   

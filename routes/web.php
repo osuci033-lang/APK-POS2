@@ -8,6 +8,10 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
@@ -34,6 +38,5 @@ Route::middleware('auth')->group(function () {
         Route::resource('/itempenjualan', ItemPenjualanController::class);
 
         Route::get('/tentang', function () { return view('tentang');})->name('tentang.index');
-        
     });
 });
