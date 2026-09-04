@@ -6,37 +6,55 @@
 
 @include('layouts.navbar')
 
-<div class="container-fluid py-4 px-3 px-md-4 bg-light min-vh-100">
+<style>
+    /* Mengatur body agar full background grid pink kucing tanpa batas putih */
+    html, body {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #fff0f5 !important;
+        background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px), linear-gradient(0deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px) !important;
+        background-size: 40px 40px !important;
+        overflow-x: hidden !important;
+    }
+</style>
 
-    {{-- Banner Ringkasan Hari Ini - Warna Presisi Sama Persis Dengan Halaman Login --}}
-    <div class="card border-0 shadow-sm mb-4 position-relative overflow-hidden" 
-         style="background-color: #ffb2cc; border-radius: 28px;">
+<div class="container-fluid py-4 px-3 px-md-4 min-vh-100" style="background-color: transparent !important;">
+
+    {{-- Banner Ringkasan Hari Ini - Warna Presisi Sama Persis Dengan Halaman Login & Efek Glassmorphism --}}
+    <div class="card border-0 shadow-sm mb-4 position-relative overflow-hidden rounded-4" 
+         style="background: linear-gradient(135deg, rgba(255, 182, 193, 0.65) 0%, rgba(248, 187, 208, 0.75) 100%); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.8) !important;">
+
         <div class="card-body p-4 p-md-5 d-flex align-items-center justify-content-between position-relative z-index-1">
             
             {{-- Sisi Kiri: Judul, Subtitle, & Tombol Tanggal --}}
-            <div class="pe-md-4">
-                <h1 class="fw-bold mb-2 text-white" style="font-size: 2.2rem; letter-spacing: -0.5px;">
+            <div class="pe-md-4 text-start">
+                <h1 class="fw-bold mb-2" style="color: #880e4f; font-family: 'Comic Sans MS', 'Bubblegum Sans', cursive, sans-serif; letter-spacing: 0.5px; font-size: 2.2rem;">
                     Ringkasan Hari Ini
                 </h1>
-                <p class="mb-4 fw-semibold" style="color: #ffffff; opacity: 0.95; font-size: 1.05rem;">
+                <p class="mb-4 fw-semibold text-white" style="opacity: 0.95; font-size: 1.05rem;">
                     Pantau kinerja penjualan dan stok sepatu kamu hari ini 
                 </p>
 
                 <div class="d-flex flex-wrap gap-2 align-items-center">
                     {{-- Badge Tanggal Style Putih Bersih --}}
                     <span class="btn btn-light fw-bold px-4 py-2 shadow-sm rounded-pill border-0 d-inline-flex align-items-center" 
-                          style="color: #ff5e83; font-size: 0.9rem; background-color: #ffffff;">
+                          style="color: #880e4f; font-size: 0.9rem; background-color: #ffffff;">
                         <i class="fas fa-calendar-alt me-2"></i> {{ $tanggalHariIni->translatedFormat('l, d F Y') }}
                     </span>
                 </div>
             </div>
 
-            {{-- Sisi Kanan: Foto Sepatu Estetik Pink/Pastel --}}
-            <div class="d-none d-md-block text-end position-relative" style="max-width: 260px;">
-                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=500&auto=format&fit=crop" 
-                     alt="Shoes Banner" 
-                     class="img-fluid rounded-4 shadow-sm"
-                     style="max-height: 160px; object-fit: cover; border: 4px solid #ffffff;">
+            {{-- Sisi Kanan: Ilustrasi Estetik ala Kucing --}}
+            <div class="d-none d-md-block text-end position-relative">
+                <div class="bg-white p-2 rounded-4 shadow-sm d-inline-block" style="transform: rotate(3deg);">
+                    <div class="rounded-3 overflow-hidden" style="width: 90px; height: 90px; background-color: #fce4ec; display: flex; align-items: center; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="#f48fb1" class="bi bi-bag-heart-fill" viewBox="0 0 16 16">
+                            <path d="M11.5 4v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m0 6.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -44,27 +62,29 @@
 
     @can('viewAny', App\Models\User::class)
     <div class="mb-3">
-        <h5 class="fw-bold text-dark mb-0">Penjualan Hari Ini</h5>
+        <h5 class="fw-bold mb-0 text-start" style="color: #880e4f;">Penjualan Hari Ini</h5>
     </div>
 
     <div class="row g-3 mb-4">
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 bg-white position-relative overflow-hidden" style="border-left: 5px solid #ff758c !important;">
+            <div class="card border-0 shadow-sm rounded-4 h-100 position-relative overflow-hidden" 
+                 style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-left: 6px solid #f48fb1 !important;">
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Total Nilai Penjualan Hari Ini</span>
-                        <h3 class="fw-bold mb-0" style="color: #d81b60;">Rp {{ number_format($ringkasan['total_penjualan']) }}</h3>
+                        <h3 class="fw-bold mb-0" style="color: #880e4f;">Rp {{ number_format($ringkasan['total_penjualan']) }}</h3>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 bg-white position-relative overflow-hidden" style="border-left: 5px solid #0d6efd !important;">
+            <div class="card border-0 shadow-sm rounded-4 h-100 position-relative overflow-hidden" 
+                 style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-left: 6px solid #ab47bc !important;">
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Jumlah Transaksi Hari Ini</span>
-                        <h3 class="fw-bold mb-0 text-dark">{{ number_format($ringkasan['total_transaksi']) }} <span class="fs-6 text-muted fw-normal">Transaksi</span></h3>
+                        <h3 class="fw-bold mb-0" style="color: #ab47bc;">{{ number_format($ringkasan['total_transaksi']) }} <span class="fs-6 text-muted fw-normal">Transaksi</span></h3>
                     </div>
                 </div>
             </div>
@@ -72,12 +92,13 @@
     </div>
 
     <div class="mb-3">
-        <h5 class="fw-bold text-dark mb-0">Status Pembayaran Tunai & QRIS</h5>
+        <h5 class="fw-bold mb-0 text-start" style="color: #880e4f;">Status Pembayaran Tunai & QRIS</h5>
     </div>
 
     <div class="row g-3 mb-4">
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 bg-white position-relative overflow-hidden" style="border-left: 5px solid #198754 !important;">
+            <div class="card border-0 shadow-sm rounded-4 h-100 position-relative overflow-hidden" 
+                 style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-left: 6px solid #81c784 !important;">
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Total Pembayaran Tunai</span>
@@ -88,7 +109,8 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card border-0 shadow-sm rounded-4 h-100 bg-white position-relative overflow-hidden" style="border-left: 5px solid #ffc107 !important;">
+            <div class="card border-0 shadow-sm rounded-4 h-100 position-relative overflow-hidden" 
+                 style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-left: 6px solid #ffb74d !important;">
                 <div class="card-body p-4 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Total Pembayaran Non-Tunai</span>
@@ -101,11 +123,11 @@
     @endcan
 
     <div class="mb-3">
-        <h5 class="fw-bold text-dark mb-0">Status Inventaris Kritis</h5>
+        <h5 class="fw-bold mb-0 text-start" style="color: #880e4f;">Status Inventaris Kritis</h5>
     </div>
 
     {{-- Stok Rendah --}}
-    <div class="card border-0 shadow-sm rounded-4 bg-white mb-4 p-4">
+    <div class="card border-0 shadow-sm rounded-4 mb-4 p-4" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold text-warning mb-0">Daftar Produk Stok Rendah</h6>
         </div>
@@ -131,14 +153,14 @@
                                 <h6 class="fw-bold text-dark mb-2 text-truncate" title="{{ $produk->nama }}">
                                     {{ $produk->nama }}
                                 </h6>
-                                <h5 class="fw-bold mb-3" style="color: #d81b60;">
+                                <h5 class="fw-bold mb-3" style="color: #880e4f;">
                                     Rp {{ number_format($produk->harga_jual ?? $produk->harga ?? 0, 0, ',', '.') }}
                                 </h5>
                             </div>
                             <div class="pt-2">
                                 <a href="{{ isset($produk->id) ? route('produk.show', $produk->id) : '#' }}" 
                                    class="btn btn-sm w-100 rounded-pill fw-semibold border-0 py-2" 
-                                   style="background-color: #e0f7fa; color: #00838f;">
+                                   style="background-color: #fce4ec; color: #880e4f;">
                                     Detail
                                 </a>
                             </div>
@@ -154,7 +176,7 @@
     </div>
 
     {{-- Produk Habis Stok --}}
-    <div class="card border-0 shadow-sm rounded-4 bg-white mb-4 p-4">
+    <div class="card border-0 shadow-sm rounded-4 mb-4 p-4" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h6 class="fw-bold text-danger mb-0">Produk Habis Stok</h6>
             <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2"></span>
@@ -181,14 +203,14 @@
                                 <h6 class="fw-bold text-dark mb-2 text-truncate" title="{{ $produk->nama }}">
                                     {{ $produk->nama }}
                                 </h6>
-                                <h5 class="fw-bold mb-3" style="color: #d81b60;">
+                                <h5 class="fw-bold mb-3" style="color: #880e4f;">
                                     Rp {{ number_format($produk->harga_jual ?? $produk->harga ?? 0, 0, ',', '.') }}
                                 </h5>
                             </div>
                             <div class="pt-2">
                                 <a href="{{ isset($produk->id) ? route('produk.show', $produk->id) : '#' }}" 
                                    class="btn btn-sm w-100 rounded-pill fw-semibold border-0 py-2" 
-                                   style="background-color: #e0f7fa; color: #00838f;">
+                                   style="background-color: #fce4ec; color: #880e4f;">
                                     Detail
                                 </a>
                             </div>
@@ -204,14 +226,14 @@
     </div>
 
     <div class="mb-3">
-        <h5 class="fw-bold text-dark mb-0">Produk Terlaris</h5>
+        <h5 class="fw-bold mb-0 text-start" style="color: #880e4f;">Produk Terlaris</h5>
     </div>
 
     {{-- Produk Paling Laris --}}
-    <div class="card border-0 shadow-sm rounded-4 bg-white mb-4 p-4">
+    <div class="card border-0 shadow-sm rounded-4 mb-4 p-4" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold mb-0" style="color: #6f42c1;">Produk Paling Laris</h6>
-            <span class="badge rounded-pill px-3 py-2" style="background-color: #f3e8ff; color: #6f42c1;"></span>
+            <h6 class="fw-bold mb-0" style="color: #880e4f;">Produk Paling Laris</h6>
+            <span class="badge rounded-pill px-3 py-2" style="background-color: #fce4ec; color: #880e4f;"></span>
         </div>
 
         <div class="row g-3">
@@ -239,14 +261,14 @@
                                 <h6 class="fw-bold text-dark mb-2 text-truncate" title="{{ $detailProduk->nama ?? '-' }}">
                                     {{ $detailProduk->nama ?? 'Nama Produk' }}
                                 </h6>
-                                <h5 class="fw-bold mb-3" style="color: #d81b60;">
+                                <h5 class="fw-bold mb-3" style="color: #880e4f;">
                                     Rp {{ number_format($detailProduk->harga_jual ?? $detailProduk->harga ?? 0, 0, ',', '.') }}
                                 </h5>
                             </div>
                             <div class="pt-2">
                                 <a href="{{ isset($detailProduk->id) ? route('produk.show', $detailProduk->id) : '#' }}" 
                                    class="btn btn-sm w-100 rounded-pill fw-semibold border-0 py-2" 
-                                   style="background-color: #f3e8ff; color: #6f42c1;">
+                                   style="background-color: #fce4ec; color: #880e4f;">
                                     Detail
                                 </a>
                             </div>

@@ -6,7 +6,21 @@
 
 @include('layouts.navbar')
 
-<div class="container py-5">
+<style>
+    /* Mengatur body agar full background grid kucing tanpa batas putih */
+    html, body {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #fff0f5 !important;
+        background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px), linear-gradient(0deg, rgba(255, 182, 193, 0.25) 2px, transparent 2px) !important;
+        background-size: 40px 40px !important;
+        overflow-x: hidden !important;
+    }
+</style>
+
+<div class="container py-5 min-vh-100" style="background-color: transparent !important;">
     <div class="row justify-content-center">
         <div class="col-lg-11 col-xl-10">
             <!-- Tambahkan h-100 di sini agar card menyesuaikan tinggi konten -->
@@ -14,8 +28,8 @@
                 <!-- Tambahkan align-items-stretch agar kedua kolom di dalam row tingginya sama rata -->
                 <div class="row g-0 align-items-stretch">
                     
-                    {{-- Sisi Kiri - Profil (Warna Pink Presisi #ffb2cc) --}}
-                    <div class="col-md-5 p-4 p-lg-5 text-center text-white d-flex flex-column justify-content-between position-relative" style="background-color: #ffb2cc;">
+                    {{-- Sisi Kiri - Profil (Warna disesuaikan dengan banner Penjualan/Ringkasan) --}}
+                    <div class="col-md-5 p-4 p-lg-5 text-center text-white d-flex flex-column justify-content-between position-relative" style="background-color: rgba(255, 182, 193, 0.9);">
                         <div>
                             <div class="position-relative d-inline-block mt-2 mb-3">
                                 <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm overflow-hidden" 
@@ -26,8 +40,9 @@
                                 </div>
                             </div>
                             
-                            <h4 class="fw-bold mb-1 text-white">Salam Kenal! 👋</h4>
-                            <p class="small opacity-90 mb-3 fw-semibold text-white">Penyanyi & Musisi Performer</p>
+                            {{-- Warna teks "Salam Kenal!" dan subteks "Penyanyi & Musisi Performer" disamakan dengan warna gelap kontras (#900c3f) --}}
+                            <h4 class="fw-bold mb-1" style="color: #900c3f;">Salam Kenal! 👋</h4>
+                            <p class="small mb-3 fw-semibold" style="color: #900c3f;">Penyanyi & Musisi Performer</p>
 
                             {{-- Cerita Singkat / Biografi Diri --}}
                             <div class="p-3 rounded-4 mb-3 text-start shadow-sm" style="background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(5px);">
@@ -62,7 +77,7 @@
                             <div class="d-flex align-items-center justify-content-between pb-3 mb-4 border-bottom" style="border-color: #ffe4e8 !important;">
                                 <div>
                                     <h4 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: #900c3f;">
-                                        <span>👟</span> SoleStation POS
+                                        <span>SoleStation POS👟</span>
                                     </h4>
                                     <small class="text-muted fw-semibold">Point of Sales System</small>
                                 </div>
@@ -123,7 +138,7 @@
                                     <div class="col-sm-6">
                                         <div class="p-3 rounded-4 h-100 shadow-sm border" style="background: linear-gradient(145deg, #ffffff, #fff5f6); border-color: #ffd6e0 !important;">
                                             <div class="d-flex align-items-center gap-2 mb-1">
-                                                <span class="p-2 rounded-3 text-white" style="background-color: #ffb2cc; font-size: 0.8rem;">📱</span>
+                                                <span class="p-2 rounded-3 text-white" style="background-color: rgba(255, 182, 193, 0.9); font-size: 0.8rem;">📱</span>
                                                 <strong class="text-dark small">Desain Responsif</strong>
                                             </div>
                                             <span class="text-muted small d-block mt-2" style="font-size: 0.8rem; line-height: 1.4;">Tampilan nyaman di laptop maupun tablet.</span>
@@ -132,7 +147,7 @@
                                     <div class="col-sm-6">
                                         <div class="p-3 rounded-4 h-100 shadow-sm border" style="background: linear-gradient(145deg, #ffffff, #fff5f6); border-color: #ffd6e0 !important;">
                                             <div class="d-flex align-items-center gap-2 mb-1">
-                                                <span class="p-2 rounded-3 text-white" style="background-color: #ffb2cc; font-size: 0.8rem;">🔐</span>
+                                                <span class="p-2 rounded-3 text-white" style="background-color: rgba(255, 182, 193, 0.9); font-size: 0.8rem;">🔐</span>
                                                 <strong class="text-dark small">Manajemen Hak Akses</strong>
                                             </div>
                                             <span class="text-muted small d-block mt-2" style="font-size: 0.8rem; line-height: 1.4;">Pemisahan akses Admin dan Kasir.</span>
