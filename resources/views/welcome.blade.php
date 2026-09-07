@@ -145,54 +145,54 @@
         
         <div class="row g-4 justify-content-center">
             
-            {{-- Produk 1 --}}
+            {{-- Produk 1 (Adidas Pink) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" class="card-img-top rounded-4" alt="Sepatu 1" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/adidas.jpg') }}" class="card-img-top rounded-4" alt="Adidas Samba Pink" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Elegant Pearl High Heels</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 470.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Adidas Samba Pink Mary Jane</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 2.600.000</p>
                     </div>
                 </div>
             </div>
 
-            {{-- Produk 2 --}}
+            {{-- Produk 2 (Vans Kids Knu Skool) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80" class="card-img-top rounded-4" alt="Sepatu 2" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/vans.jpg') }}" class="card-img-top rounded-4" alt="Vans Kids Knu Skool" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Floral Lace Mary Jane</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 265.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Vans Kids Knu Skool (Leopard Misty Mauve)</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.099.000</p>
                     </div>
                 </div>
             </div>
 
-            {{-- Produk 3 --}}
+            {{-- Produk 3 (New Balance 9060 Rose Sugar) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=400&q=80" class="card-img-top rounded-4" alt="Sepatu 3" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/nb.jpg') }}" class="card-img-top rounded-4" alt="New Balance 9060 Rose Sugar" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Coco Insulated Puffer</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 4.700.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">New Balance 9060 "Rose Sugar"</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 2.950.000</p>
                     </div>
                 </div>
             </div>
 
-            {{-- Produk 4 --}}
+            {{-- Produk 4 (Winflag High Heel Platform Bridal/Wedding Shoes) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=400&q=80" class="card-img-top rounded-4" alt="Sepatu 4" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/heels.jpg') }}" class="card-img-top rounded-4" alt="Winflag High Heel Platform" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Chunky Heels Coquette</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 290.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Winflag High Heel Platform Bridal Shoes</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.880.000</p>
                     </div>
                 </div>
             </div>

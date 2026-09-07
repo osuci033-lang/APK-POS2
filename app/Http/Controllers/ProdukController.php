@@ -54,6 +54,8 @@ class ProdukController extends Controller
 
         if ($request->hasFile('foto')) {
             $data['foto'] = $request->file('foto')->store('products', 'public');
+        } else {
+            $data['foto'] = 'default.png'; // Atau sesuaikan dengan nama file default jika database wajib isi foto
         }
 
         Produk::create($data);
