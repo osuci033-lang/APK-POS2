@@ -205,25 +205,47 @@
                     {{-- Total Pembayaran --}}
                     <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3 shadow-sm" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
                         <span class="fw-bold small" style="color: #ad1457;">Total Pembayaran</span>
-                        <strong class="fs-5" style="color: #20c997;">
+                        <strong class="fs-5" style="color: #20c997;" id="totalPembayaranValue" data-total="{{ isset($sale) ? $sale->total_pembayaran : 0 }}">
                             Rp {{ isset($sale) ? number_format($sale->total_pembayaran, 0, ',', '.') : '0' }}
                         </strong>
                     </div>
 
                     @if(isset($sale))
-                    <form method="POST" action="{{ route('penjualan.update', $sale->id) }}" onsubmit="return confirm('Yakin ingin checkout transaksi ini?')">
+                    <form method="POST" action="{{ route('penjualan.update', $sale->id) }}" id="formCheckout" onsubmit="return confirm('Yakin ingin checkout transaksi ini?')">
                         @csrf
                         @method('PUT')
 
-                        <select name="metode_pembayaran" class="form-select form-select-sm mb-3 rounded-pill" style="border-color: #f8bbd0; color: #880e4f; background-color: #fff0f5;" required>
-                            <option value="" disabled selected>Pilih Metode Pembayaran</option>
-                            <option value="CASH">Cash</option>
-                            <option value="QRIS">QRIS</option>
-                        </select>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold" style="color: #880e4f;">Metode Pembayaran</label>
+                            <select name="metode_pembayaran" id="metodePembayaran" class="form-select form-select-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f; background-color: #fff0f5;" required>
+                                <option value="CASH" selected>Cash / Tunai</option>
+                                <option value="QRIS">QRIS</option>
+                            </select>
+                        </div>
 
-                        <button type="submit" class="btn w-100 fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;" onmouseover="this.style.backgroundColor='#12b886'" onmouseout="this.style.backgroundColor='#20c997'">
-                            <i class="bi bi-check-circle me-1"></i> Checkout Sekarang
-                        </button>
+                        {{-- Bagian Khusus Cash (Uang yang Dikasih & Kembalian) --}}
+                        <div id="cashSection" class="mb-3 p-3 rounded-3 shadow-sm" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
+                            <div class="mb-2">
+                                <span class="small text-muted d-block mb-1">Total Tagihan: <strong style="color: #880e4f;">Rp {{ isset($sale) ? number_format($sale->total_pembayaran, 0, ',', '.') : '0' }}</strong></span>
+                                <label class="form-label small fw-bold" style="color: #880e4f;">Uang yang Dikasih (Cash)</label>
+                                <input type="number" name="uang_diberikan" id="uangDiberikan" class="form-control form-control-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f;" placeholder="Masukkan jumlah uang.." required>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span class="small fw-bold text-muted">Uang Kembalian:</span>
+                                <span class="fw-bold small text-success" id="uangKembalian">Rp 0</span>
+                            </div>
+                        </div>
+
+                        {{-- Tombol Aksi (Checkout & Simpan Draft) --}}
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;">
+                                <i class="bi bi-check-circle me-1"></i> Checkout Sekarang (Selesai)
+                            </button>
+
+                            <button type="submit" name="action" value="draft" class="btn fw-bold shadow-sm py-2 rounded-pill border-0 text-white" style="background-color: #ffc107;" title="Simpan sebagai draft transaksi">
+                                <i class="bi bi-bookmark-plus me-1"></i> Simpan sebagai Draft
+                            </button>
+                        </div>
                     </form>
 
                     {{-- Tombol Batalkan Transaksi --}}
@@ -270,13 +292,13 @@
     </div>
 </div>
 
-{{-- Skrip Debounce Search & Auto-Focus --}}
+{{-- Skrip Debounce Search, Auto-Focus, & Kalkulasi Cash/Kembalian --}}
 <script>
     let timer;
     const inputSearch = document.getElementById('inputSearchProduk');
     const searchForm = document.getElementById('searchForm');
 
-    inputSearch.addEventListener('keyup', function() {
+    inputSearch?.addEventListener('keyup', function() {
         clearTimeout(timer);
         timer = setTimeout(function() {
             searchForm.submit();
@@ -289,5 +311,35 @@
             inputSearch.setSelectionRange(inputSearch.value.length, inputSearch.value.length);
         }
     };
+
+    document.getElementById('metodePembayaran')?.addEventListener('change', function() {
+        const cashSection = document.getElementById('cashSection');
+        const inputUang = document.getElementById('uangDiberikan');
+        if (this.value === 'CASH') {
+            cashSection.classList.remove('d-none');
+            inputUang.setAttribute('required', 'required');
+        } else {
+            cashSection.classList.add('d-none');
+            inputUang.removeAttribute('required');
+            inputUang.value = '';
+        }
+    });
+
+    document.getElementById('uangDiberikan')?.addEventListener('input', function() {
+        const total = parseFloat(document.getElementById('totalPembayaranValue').getAttribute('data-total')) || 0;
+        const bayar = parseFloat(this.value) || 0;
+        const kembalian = bayar - total;
+
+        const kembalianElem = document.getElementById('uangKembalian');
+        if (kembalian >= 0) {
+            kembalianElem.textContent = 'Rp ' + kembalian.toLocaleString('id-ID');
+            kembalianElem.classList.remove('text-danger');
+            kembalianElem.classList.add('text-success');
+        } else {
+            kembalianElem.textContent = 'Uang kurang (Rp ' + Math.abs(kembalian).toLocaleString('id-ID') + ')';
+            kembalianElem.classList.remove('text-success');
+            kembalianElem.classList.add('text-danger');
+        }
+    });
 </script>
 @endsection

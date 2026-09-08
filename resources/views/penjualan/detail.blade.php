@@ -106,7 +106,7 @@
                     <button onclick="window.print()" 
                             class="btn fw-semibold px-4 rounded-pill border-0 shadow-sm"
                             style="background-color: #ffb6c1; color: white;">
-                        Cetak Struk
+                        Cetak Print
                     </button>
                 </div>
 
