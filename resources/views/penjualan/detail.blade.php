@@ -10,7 +10,7 @@
 
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8">
-            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden" style="border: 1px solid #fcc2d7 !important;">
+            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden printable-area" style="border: 1px solid #fcc2d7 !important;">
                 
                 {{-- Header Warna Pink Soft Sesuai Panel Salam Kenal --}}
                 <div class="card-header p-4 text-white d-flex align-items-center justify-content-between border-0" 
@@ -95,13 +95,19 @@
 
                 </div>
 
-                {{-- Footer & Tombol Kembali Soft Pink Kapsul --}}
-                <div class="card-footer p-3 d-flex justify-content-start align-items-center bg-white border-0">
+                {{-- Footer & Tombol Aksi (Kembali & Cetak) --}}
+                <div class="card-footer p-3 d-flex justify-content-between align-items-center bg-white border-0">
                     <a href="{{ route('penjualan.index') }}" 
                        class="btn fw-semibold px-4 rounded-pill border-0"
                        style="background-color: #fde2e4; color: #701a35;">
                         Kembali
                     </a>
+                    
+                    <button onclick="window.print()" 
+                            class="btn fw-semibold px-4 rounded-pill border-0 shadow-sm"
+                            style="background-color: #ffb6c1; color: white;">
+                        Cetak Struk
+                    </button>
                 </div>
 
             </div>
@@ -110,5 +116,29 @@
     </div>
 
 </div>
+
+{{-- CSS Khusus untuk Print/Cetak --}}
+<style>
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .printable-area, .printable-area * {
+        visibility: visible;
+    }
+    .printable-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    /* Sembunyikan tombol saat dicetak */
+    .card-footer {
+        display: none !important;
+    }
+}
+</style>
 
 @endsection
