@@ -241,10 +241,6 @@
                             <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;">
                                 <i class="bi bi-check-circle me-1"></i> Checkout Sekarang (Selesai)
                             </button>
-
-                            <button type="submit" name="action" value="draft" class="btn fw-bold shadow-sm py-2 rounded-pill border-0 text-white" style="background-color: #ffc107;" title="Simpan sebagai draft transaksi">
-                                <i class="bi bi-bookmark-plus me-1"></i> Simpan sebagai Draft
-                            </button>
                         </div>
                     </form>
 

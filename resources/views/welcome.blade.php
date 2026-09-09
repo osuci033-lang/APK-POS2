@@ -130,9 +130,9 @@
     {{-- Banner Utama --}}
     <header class="hero-section px-3">
         <div>
-            <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Step into Elegance & Style</h1>
+            <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Melangkah dengan Elegan & Penuh Gaya</h1>
             <p class="lead mb-4" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Temukan koleksi sepatu impian terbaik dengan kualitas terkurasi hanya untukmu.</p>
-            <a href="#katalog" class="btn btn-custom-shop shadow-lg">Jelajahi Koleksi</a>
+            <a href="javascript:void(0);" onclick="document.getElementById('katalog').scrollIntoView({behavior: 'smooth'});" class="btn btn-custom-shop shadow-lg">Jelajahi Koleksi</a>
         </div>
     </header>
 
@@ -240,7 +240,7 @@
                     <h6 class="fw-bold mb-3">Menu Utama</h6>
                     <ul class="list-unstyled small d-flex flex-column gap-2">
                         <li><a href="#"><i class="bi bi-chevron-right small me-1"></i>Beranda</a></li>
-                        <li><a href="#katalog"><i class="bi bi-chevron-right small me-1"></i>Produk</a></li>
+                        <li><a href="javascript:void(0);" onclick="document.getElementById('katalog').scrollIntoView({behavior: 'smooth'});"><i class="bi bi-chevron-right small me-1"></i>Produk</a></li>
                         <li><a href="{{ route('login') }}"><i class="bi bi-chevron-right small me-1"></i>Sign In Staff</a></li>
                     </ul>
                 </div>
