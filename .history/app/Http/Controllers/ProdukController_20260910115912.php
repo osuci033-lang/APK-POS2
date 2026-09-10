@@ -107,8 +107,12 @@ class ProdukController extends Controller
     {
         $this->authorize('delete', $produk);
 
-        // Hapus data terkait di item_penjualan terlebih dahulu untuk mencegah SQLSTATE[23000]
-        DB::table('item_penjualan')->where('produk_id', $produk->id)->delete();
+        // Pengecekan langsung ke tabel item_penjualan untuk menghindari foreign key constraint violation
+        $isUsed = DB::table('item_penjualan')->where('produk_id', $produk->id)->exists();
+
+        if ($isUsed) {
+            return redirect()->route('produk.index')->with('error', 'Produk tidak dapat dihapus karena sudah pernah tercatat dalam transaksi penjualan.');
+        }
 
         if ($produk->foto && $produk->foto !== 'default.png' && Storage::disk('public')->exists($produk->foto)) {
             Storage::disk('public')->delete($produk->foto);

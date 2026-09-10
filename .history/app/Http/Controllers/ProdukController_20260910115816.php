@@ -8,7 +8,6 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProdukController extends Controller
@@ -107,8 +106,10 @@ class ProdukController extends Controller
     {
         $this->authorize('delete', $produk);
 
-        // Hapus data terkait di item_penjualan terlebih dahulu untuk mencegah SQLSTATE[23000]
-        DB::table('item_penjualan')->where('produk_id', $produk->id)->delete();
+        // Pengecekan agar tidak terjadi error foreign key constraint violation (SQLSTATE[23000])
+        if (method_exists($produk, 'itemPenjualans') && $produk->itemPenjualans()->exists()) {
+            return redirect()->route('produk.index')->with('error', 'Produk tidak dapat dihapus karena sudah pernah tercatat dalam transaksi penjualan.');
+        }
 
         if ($produk->foto && $produk->foto !== 'default.png' && Storage::disk('public')->exists($produk->foto)) {
             Storage::disk('public')->delete($produk->foto);
