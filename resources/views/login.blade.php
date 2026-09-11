@@ -62,7 +62,7 @@
                     <div class="card-body p-4 p-sm-5 text-center">
                         
                         <div class="mt-2 mb-4">
-                            <h1 class="fw-bolder mb-1" style="color: #ff69b4; font-size: 2.75rem; font-family: 'Comic Sans MS', cursive, sans-serif; text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 105, 180, 0.3); letter-spacing: 2px;">LOGIN</h1>
+                            <h1 class="fw-bolder mb-1" style="color: #ff69b4; font-size: 2.1rem; font-family: 'Comic Sans MS', cursive, sans-serif; text-shadow: 2px 2px 0px #fff, 4px 4px 0px rgba(255, 105, 180, 0.3); letter-spacing: 1px;">LOGIN STATION POS</h1>
                             <p class="text-muted small mb-0" style="font-size: 0.8rem;">Masuk ke akun Anda untuk mulai bertransaksi</p>
                         </div>
 
@@ -126,7 +126,7 @@
                                     <div class="invalid-feedback d-block mt-1 small text-danger fw-semibold">
                                         {{ $message }}
                                     </div>
-                                @enderror     
+                                @enderror    
                             </div>
 
                             <button type="submit" 

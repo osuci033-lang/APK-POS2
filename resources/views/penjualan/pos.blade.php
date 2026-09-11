@@ -20,7 +20,7 @@
     <div class="d-flex align-items-center justify-content-between mb-4">
         <div>
             <h4 class="fw-bold mb-1" style="color: #880e4f;">
-                Kasir POS & Transaksi
+                Kasir POS & Transaksi - Solestation
             </h4>
             <p class="mb-0 text-muted small">Pilih produk di katalog sebelah kiri untuk dimasukkan ke keranjang.</p>
         </div>
@@ -210,74 +210,87 @@
                         </strong>
                     </div>
 
+                    {{-- Form Pembayaran, Pilihan Metode, & Tombol Checkout (Hanya Tampil Jika Keranjang Ada Isinya) --}}
+                    @if(isset($sale) && $sale->itemPenjualan && $sale->itemPenjualan->count() > 0)
+                        <form method="POST" action="{{ route('penjualan.update', $sale->id) }}" id="formCheckout" onsubmit="return confirm('Yakin ingin checkout transaksi ini?')">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold" style="color: #880e4f;">Metode Pembayaran</label>
+                                <select name="metode_pembayaran" id="metodePembayaran" class="form-select form-select-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f; background-color: #fff0f5;" required>
+                                    <option value="" disabled selected>-- Pilih Metode Pembayaran --</option>
+                                    <option value="CASH">Cash / Tunai</option>
+                                    <option value="QRIS">QRIS</option>
+                                </select>
+                            </div>
+
+                            {{-- Bagian Khusus Cash (Awalnya tersembunyi d-none) --}}
+                            <div id="cashSection" class="mb-3 p-3 rounded-3 shadow-sm d-none" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
+                                <div class="mb-2">
+                                    <span class="small text-muted d-block mb-1">Total Tagihan: <strong style="color: #880e4f;">Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}</strong></span>
+                                    <label class="form-label small fw-bold" style="color: #880e4f;">Uang yang Dikasih (Cash)</label>
+                                    <input type="number" name="uang_diberikan" id="uangDiberikan" class="form-control form-control-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f;" placeholder="Masukkan jumlah uang..">
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <span class="small fw-bold text-muted">Uang Kembalian:</span>
+                                    <span class="fw-bold small text-success" id="uangKembalian">Rp 0</span>
+                                </div>
+                            </div>
+
+                            {{-- Bagian Khusus QRIS (Awalnya tersembunyi d-none) --}}
+                            <div id="qrisSection" class="mb-3 p-3 rounded-3 shadow-sm text-center d-none" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
+                                <span class="small fw-bold d-block mb-1" style="color: #880e4f;">QRIS Solestation POS</span>
+                                <div class="bg-white p-2 rounded-3 d-inline-block shadow-sm">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SOLESTATION_POS_PAYMENT" alt="QRIS Solestation POS" class="img-fluid rounded" style="max-width: 140px; height: auto;">
+                                </div>
+                                <span class="text-muted d-block mt-2" style="font-size: 0.75rem;">Scan menggunakan GoPay, OVO, Dana, BCA, atau Mobile Banking lainnya</span>
+                            </div>
+
+                            {{-- Tombol Checkout (Awalnya tersembunyi d-none sampai metode dipilih) --}}
+                            <div class="d-grid gap-2 d-none mb-3" id="checkoutButtonSection">
+                                <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;">
+                                    <i class="bi bi-check-circle me-1"></i> Checkout Sekarang (Selesai)
+                                </button>
+                            </div>
+                        </form>
+                    @endif
+
+                    {{-- Tombol Batalkan Transaksi & Modal (Dipindah ke Paling Bawah) --}}
                     @if(isset($sale))
-                    <form method="POST" action="{{ route('penjualan.update', $sale->id) }}" id="formCheckout" onsubmit="return confirm('Yakin ingin checkout transaksi ini?')">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold" style="color: #880e4f;">Metode Pembayaran</label>
-                            <select name="metode_pembayaran" id="metodePembayaran" class="form-select form-select-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f; background-color: #fff0f5;" required>
-                                <option value="CASH" selected>Cash / Tunai</option>
-                                <option value="QRIS">QRIS</option>
-                            </select>
-                        </div>
-
-                        {{-- Bagian Khusus Cash (Uang yang Dikasih & Kembalian) --}}
-                        <div id="cashSection" class="mb-3 p-3 rounded-3 shadow-sm" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
-                            <div class="mb-2">
-                                <span class="small text-muted d-block mb-1">Total Tagihan: <strong style="color: #880e4f;">Rp {{ isset($sale) ? number_format($sale->total_pembayaran, 0, ',', '.') : '0' }}</strong></span>
-                                <label class="form-label small fw-bold" style="color: #880e4f;">Uang yang Dikasih (Cash)</label>
-                                <input type="number" name="uang_diberikan" id="uangDiberikan" class="form-control form-control-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f;" placeholder="Masukkan jumlah uang.." required>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-2">
-                                <span class="small fw-bold text-muted">Uang Kembalian:</span>
-                                <span class="fw-bold small text-success" id="uangKembalian">Rp 0</span>
-                            </div>
-                        </div>
-
-                        {{-- Tombol Aksi (Checkout & Simpan Draft) --}}
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;">
-                                <i class="bi bi-check-circle me-1"></i> Checkout Sekarang (Selesai)
+                        <div>
+                            <button type="button" 
+                                    class="btn btn-outline-danger w-100 fw-bold rounded-pill py-2 shadow-sm"
+                                    style="font-size: 0.85rem;"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalBatalTransaksi">
+                                <i class="bi bi-x-circle me-1"></i> Batalkan Transaksi Ini
                             </button>
                         </div>
-                    </form>
 
-                    {{-- Tombol Batalkan Transaksi --}}
-                    <div class="pt-3 mt-3 border-top text-center" style="border-color: #fce4ec !important;">
-                        <button type="button" 
-                                class="btn btn-outline-danger w-100 fw-bold rounded-pill py-2 shadow-sm"
-                                style="font-size: 0.85rem;"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalBatalTransaksi">
-                            <i class="bi bi-x-circle me-1"></i> Batalkan Transaksi Ini
-                        </button>
-                    </div>
-
-                    {{-- Modal Konfirmasi Batal --}}
-                    <div class="modal fade" id="modalBatalTransaksi" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-sm">
-                            <div class="modal-content border-0 shadow-lg rounded-4" style="border: 1px solid #f8bbd0 !important;">
-                                <div class="modal-body text-center p-4">
-                                    <div class="mb-3 text-danger">
-                                        <i class="bi bi-exclamation-circle fs-1"></i>
-                                    </div>
-                                    <h6 class="fw-bold mb-2" style="color: #880e4f;">Batalkan Transaksi?</h6>
-                                    <p class="text-muted small mb-4">Semua item di keranjang akan dihapus dan transaksi dibatalkan.</p>
-                                    
-                                    <div class="d-flex gap-2">
-                                        <button type="button" class="btn w-50 btn-sm fw-semibold rounded-pill border-0" style="background-color: #fce4ec; color: #880e4f;" data-bs-dismiss="modal">Tidak</button>
-                                        <form action="{{ route('penjualan.destroy', $sale->id) }}" method="POST" class="w-50">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn w-100 btn-sm fw-semibold rounded-pill text-white border-0 bg-danger">Ya, Batalkan</button>
-                                        </form>
+                        {{-- Modal Konfirmasi Batal --}}
+                        <div class="modal fade" id="modalBatalTransaksi" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                <div class="modal-content border-0 shadow-lg rounded-4" style="border: 1px solid #f8bbd0 !important;">
+                                    <div class="modal-body text-center p-4">
+                                        <div class="mb-3 text-danger">
+                                            <i class="bi bi-exclamation-circle fs-1"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-2" style="color: #880e4f;">Batalkan Transaksi?</h6>
+                                        <p class="text-muted small mb-4">Semua item di keranjang akan dihapus dan transaksi dibatalkan.</p>
+                                        
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn w-50 btn-sm fw-semibold rounded-pill border-0" style="background-color: #fce4ec; color: #880e4f;" data-bs-dismiss="modal">Tidak</button>
+                                            <form action="{{ route('penjualan.destroy', $sale->id) }}" method="POST" class="w-50">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn w-100 btn-sm fw-semibold rounded-pill text-white border-0 bg-danger">Ya, Batalkan</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endif
 
                 </div>
@@ -288,7 +301,7 @@
     </div>
 </div>
 
-{{-- Skrip Debounce Search, Auto-Focus, & Kalkulasi Cash/Kembalian --}}
+{{-- Skrip Interaksi Dinamis Metode Pembayaran --}}
 <script>
     let timer;
     const inputSearch = document.getElementById('inputSearchProduk');
@@ -310,12 +323,19 @@
 
     document.getElementById('metodePembayaran')?.addEventListener('change', function() {
         const cashSection = document.getElementById('cashSection');
+        const qrisSection = document.getElementById('qrisSection');
         const inputUang = document.getElementById('uangDiberikan');
+        const checkoutBtnSec = document.getElementById('checkoutButtonSection');
+
         if (this.value === 'CASH') {
             cashSection.classList.remove('d-none');
+            qrisSection.classList.add('d-none');
+            if(checkoutBtnSec) checkoutBtnSec.classList.remove('d-none');
             inputUang.setAttribute('required', 'required');
-        } else {
+        } else if (this.value === 'QRIS') {
             cashSection.classList.add('d-none');
+            qrisSection.classList.remove('d-none');
+            if(checkoutBtnSec) checkoutBtnSec.classList.remove('d-none');
             inputUang.removeAttribute('required');
             inputUang.value = '';
         }
