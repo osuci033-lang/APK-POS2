@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm py-2 mb-4 sticky-top" style="z-index: 1020;">
     <div class="container-fluid px-3 px-md-4">
         
-        {{-- Logo & Brand --}}
-        <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-dark me-4" href="{{ route('dashboard') }}">
+        {{-- Logo & Brand (Mengarah khusus ke halaman tentang toko saja) --}}
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2 text-dark me-4" href="{{ route('toko.index') }}">
             <span><span style="color: #e83e8c;">SoleStation</span> POS</span>
         </a>
 
@@ -59,7 +59,7 @@
                     </a>
                 </li>
 
-                {{-- Tentang --}}
+                {{-- Tentang (Profil Lengkap / Pembuat) --}}
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 rounded-3 d-flex align-items-center gap-2 {{ Request::is('tentang*') ? 'active fw-bold' : 'text-secondary' }}" 
                        style="{{ Request::is('tentang*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"

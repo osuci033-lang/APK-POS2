@@ -38,5 +38,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/itempenjualan', ItemPenjualanController::class);
 
         Route::get('/tentang', function () { return view('tentang');})->name('tentang.index');
+        
+        // Penambahan rute khusus untuk halaman tentang toko (SoleStation POS)
+        Route::get('/toko', function () { return view('toko'); })->name('toko.index');
     });
 });
