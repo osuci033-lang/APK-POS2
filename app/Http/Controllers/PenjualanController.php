@@ -75,7 +75,7 @@ class PenjualanController extends Controller
     }
 
     /**
-     * Store: Digunakan untuk AKSI KLIK PRODUK (Tambah ke keranjang otomatis ala Shopee).
+     * Store: Digunakan untuk AKSI KLIK PRODUK (Tambah ke keranjang otomatis dengan Harga Diskon Produk).
      */
     public function store(Request $request)
     {
@@ -93,31 +93,36 @@ class PenjualanController extends Controller
                 return;
             }
 
+            // Tentukan harga final: Prioritaskan harga_diskon jika ada dan valid, jika tidak gunakan harga_jual normal
+            $hargaFinal = (!empty($produk->harga_diskon) && $produk->harga_diskon > 0) 
+                ? $produk->harga_diskon 
+                : $produk->harga_jual;
+
             // Cek apakah item sudah ada di keranjang transaksi ini
             $item = ItemPenjualan::where('penjualan_id', $penjualan->id)
                 ->where('produk_id', $produk->id)
                 ->first();
 
             if ($item) {
-                // Tambah kuantitas jika sudah ada
+                // Tambah kuantitas jika sudah ada dan hitung ulang subtotal berdasarkan harga diskon/normal produk
                 $item->kuantitas += 1;
-                $item->subtotal = $item->kuantitas * $produk->harga_jual;
+                $item->subtotal = $item->kuantitas * $hargaFinal;
                 $item->save();
             } else {
-                // Buat baru jika belum ada di keranjang
+                // Buat baru jika belum ada di keranjang menggunakan harga diskon/normal produk
                 ItemPenjualan::create([
                     'penjualan_id' => $penjualan->id,
                     'produk_id'    => $produk->id,
                     'kuantitas'    => 1,
-                    'harga'        => $produk->harga_jual,
-                    'subtotal'     => $produk->harga_jual,
+                    'harga'        => $hargaFinal,
+                    'subtotal'     => $hargaFinal,
                 ]);
             }
 
             // Kurangi stok produk secara langsung
             $produk->decrement('stok', 1);
 
-            // Update total pembayaran di tabel penjualan
+            // Update total pembayaran di tabel penjualan (sementara sebelum diskon global kasir)
             $totalBaru = ItemPenjualan::where('penjualan_id', $penjualan->id)->sum('subtotal');
             $penjualan->update(['total_pembayaran' => $totalBaru]);
         });
@@ -167,7 +172,6 @@ class PenjualanController extends Controller
      */
     public function update(Request $request, Penjualan $penjualan)
     {
-        // Sesuaikan validasi dengan nama kolom database Anda ('metode_pembayaran')
         $request->validate([
             'metode_pembayaran' => 'required|in:CASH,QRIS'
         ], [
@@ -183,11 +187,17 @@ class PenjualanController extends Controller
         }
 
         DB::transaction(function () use ($penjualan, $request) {
-            $total = $penjualan->itemPenjualan()->sum('subtotal');
+            // Ambil subtotal dari item keranjang
+            $subtotal = $penjualan->itemPenjualan()->sum('subtotal');
 
+            // Hitung diskon global 10% dan kurangkan dari subtotal
+            $diskon = $subtotal * 0.10;
+            $totalAkhir = $subtotal - $diskon;
+
+            // Simpan total akhir setelah diskon ke database saat checkout
             $penjualan->update([
                 'metode_pembayaran' => $request->metode_pembayaran,
-                'total_pembayaran'  => $total,
+                'total_pembayaran'  => $totalAkhir,
                 'status'            => 'COMPLETED'
             ]);
         });
@@ -221,5 +231,34 @@ class PenjualanController extends Controller
         return redirect()
             ->route('penjualan.index')
             ->with('success', 'Transaksi berhasil dibatalkan');
+    }
+
+    /**
+     * TAMBAHAN: Fungsi untuk menampilkan halaman Laporan Penjualan (Harian, Mingguan, Bulanan).
+     */
+    public function laporan(Request $request)
+    {
+        $filter = $request->get('filter', 'harian');
+
+        $query = Penjualan::with(['user', 'itemPenjualan.produk'])
+            ->whereIn('status', ['COMPLETED', 'SELESAI'])
+            ->latest();
+
+        if ($filter == 'harian') {
+            $query->whereDate('created_at', today());
+        } elseif ($filter == 'mingguan') {
+            $query->whereBetween('created_at', [now()->startOfWeek()->startOfDay(), now()->copy()->subDay()->endOfDay()]);
+        } elseif ($filter == 'bulanan') {
+            $query->whereYear('created_at', now()->year)
+                  ->whereMonth('created_at', now()->month)
+                  ->whereDate('created_at', '<', today());
+        }
+
+        $transaksis = $query->get();
+        
+        $totalPendapatan = $transaksis->sum('total_pembayaran');
+        $jumlahTransaksi = $transaksis->count();
+
+        return view('laporan.index', compact('transaksis', 'totalPendapatan', 'jumlahTransaksi', 'filter'));
     }
 }

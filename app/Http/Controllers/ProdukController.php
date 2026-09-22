@@ -19,7 +19,6 @@ class ProdukController extends Controller
         $keyword = $request->input('search');
 
         if ($keyword) {
-            // Menggunakan ->get() agar semua data hasil pencarian langsung tampil
             $products = Produk::when($keyword, function ($query) use ($keyword) {
                 $query->where('nama', 'like', '%' . $keyword . '%')
                       ->orWhere('jenis', 'like', '%' . $keyword . '%');
@@ -27,11 +26,19 @@ class ProdukController extends Controller
             ->orderBy('nama')
             ->get();
         } else {
-            // Menggunakan ->get() agar semua produk tampil sekaligus tanpa halaman (1 2 dst)
             $products = Produk::latest()->get();
         }
 
-        return view('produk.index', compact('products'));
+        // PERBAIKAN: Menghitung berdasarkan frekuensi transaksi di item_penjualan 
+        // sehingga aman dari error nama kolom.
+        $bestSellers = Produk::select('produk.*', DB::raw('COUNT(item_penjualan.produk_id) as total_terjual'))
+            ->leftJoin('item_penjualan', 'produk.id', '=', 'item_penjualan.produk_id')
+            ->groupBy('produk.id', 'produk.user_id', 'produk.nama', 'produk.jenis', 'produk.harga_beli', 'produk.harga_jual', 'produk.stok', 'produk.foto', 'produk.created_at', 'produk.updated_at')
+            ->orderByDesc('total_terjual')
+            ->take(3)
+            ->get();
+
+        return view('produk.index', compact('products', 'bestSellers'));
     }
 
     public function create()
@@ -56,7 +63,7 @@ class ProdukController extends Controller
         if ($request->hasFile('foto')) {
             $data['foto'] = $request->file('foto')->store('products', 'public');
         } else {
-            $data['foto'] = 'default.png'; // Atau sesuaikan dengan nama file default jika database wajib isi foto
+            $data['foto'] = 'default.png';
         }
 
         Produk::create($data);
@@ -107,7 +114,6 @@ class ProdukController extends Controller
     {
         $this->authorize('delete', $produk);
 
-        // Hapus data terkait di item_penjualan terlebih dahulu untuk mencegah SQLSTATE[23000]
         DB::table('item_penjualan')->where('produk_id', $produk->id)->delete();
 
         if ($produk->foto && $produk->foto !== 'default.png' && Storage::disk('public')->exists($produk->foto)) {

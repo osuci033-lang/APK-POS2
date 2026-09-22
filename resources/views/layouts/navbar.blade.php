@@ -59,6 +59,16 @@
                     </a>
                 </li>
 
+                {{-- Laporan Penjualan (DITAMBAHKAN DI SINI) --}}
+                <li class="nav-item">
+                    <a class="nav-link px-3 py-2 rounded-3 d-flex align-items-center gap-2 {{ Request::is('laporan*') ? 'active fw-bold' : 'text-secondary' }}" 
+                       style="{{ Request::is('laporan*') ? 'background-color: #fce4ec; color: #d81b60 !important;' : '' }}"
+                       href="{{ route('laporan.index') }}">
+                        <i class="bi bi-file-earmark-text-fill fs-6"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
+
                 {{-- Tentang (Profil Lengkap / Pembuat) --}}
                 <li class="nav-item">
                     <a class="nav-link px-3 py-2 rounded-3 d-flex align-items-center gap-2 {{ Request::is('tentang*') ? 'active fw-bold' : 'text-secondary' }}" 

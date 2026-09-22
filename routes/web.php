@@ -41,5 +41,8 @@ Route::middleware('auth')->group(function () {
         
         // Penambahan rute khusus untuk halaman tentang toko (SoleStation POS)
         Route::get('/toko', function () { return view('toko'); })->name('toko.index');
+
+        // TAMBAHAN: Rute untuk Laporan Penjualan agar navbar tidak error
+        Route::get('/laporan', [PenjualanController::class, 'laporan'])->name('laporan.index');
     });
 });

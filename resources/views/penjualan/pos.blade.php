@@ -202,12 +202,36 @@
                 </div>
 
                 <div class="card-footer bg-white border-top-0 p-4">
-                    {{-- Total Pembayaran --}}
-                    <div class="d-flex justify-content-between align-items-center mb-3 p-3 rounded-3 shadow-sm" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
-                        <span class="fw-bold small" style="color: #ad1457;">Total Pembayaran</span>
-                        <strong class="fs-5" style="color: #20c997;" id="totalPembayaranValue" data-total="{{ isset($sale) ? $sale->total_pembayaran : 0 }}">
-                            Rp {{ isset($sale) ? number_format($sale->total_pembayaran, 0, ',', '.') : '0' }}
-                        </strong>
+                    {{-- Perhitungan Diskon & Total Pembayaran (Tema Kotak Cokelat) --}}
+                    @php
+                        $rawSubtotal = isset($sale) ? $sale->total_pembayaran : 0;
+                        $isDiscount = $rawSubtotal > 1000000;
+                        $discountAmount = $isDiscount ? $rawSubtotal * 0.10 : 0;
+                        $finalTotal = $rawSubtotal - $discountAmount;
+                    @endphp
+
+                    <div class="mb-3 p-3 rounded-4 shadow-sm" style="background-color: #fdf8f6; border: 1px solid #d7ccc8;">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <span class="small text-muted">Subtotal</span>
+                            <span class="fw-semibold small" style="color: #5d4037;">Rp {{ number_format($rawSubtotal, 0, ',', '.') }}</span>
+                        </div>
+                        
+                        @if($isDiscount)
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="small d-flex align-items-center gap-1" style="color: #5d4037;">
+                                Diskon 10% <span class="badge rounded-pill text-white px-2 py-0" style="background-color: #2e7d32; font-size: 0.65rem;">Aktif</span>
+                            </span>
+                            <span class="small fw-semibold text-danger">- Rp {{ number_format($discountAmount, 0, ',', '.') }}</span>
+                        </div>
+                        <hr class="my-2 text-muted opacity-25">
+                        @endif
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold small" style="color: #4e342e;">TOTAL PEMBAYARAN</span>
+                            <strong class="fs-5" style="color: #4e342e;" id="totalPembayaranValue" data-total="{{ $finalTotal }}">
+                                Rp {{ number_format($finalTotal, 0, ',', '.') }}
+                            </strong>
+                        </div>
                     </div>
 
                     {{-- Form Pembayaran, Pilihan Metode, & Tombol Checkout (Hanya Tampil Jika Keranjang Ada Isinya) --}}
@@ -228,7 +252,7 @@
                             {{-- Bagian Khusus Cash (Awalnya tersembunyi d-none) --}}
                             <div id="cashSection" class="mb-3 p-3 rounded-3 shadow-sm d-none" style="background-color: #fff0f5; border: 1px solid #f8bbd0;">
                                 <div class="mb-2">
-                                    <span class="small text-muted d-block mb-1">Total Tagihan: <strong style="color: #880e4f;">Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}</strong></span>
+                                    <span class="small text-muted d-block mb-1">Total Tagihan: <strong style="color: #880e4f;">Rp {{ number_format($finalTotal, 0, ',', '.') }}</strong></span>
                                     <label class="form-label small fw-bold" style="color: #880e4f;">Uang yang Dikasih (Cash)</label>
                                     <input type="number" name="uang_diberikan" id="uangDiberikan" class="form-control form-control-sm rounded-pill" style="border-color: #f8bbd0; color: #880e4f;" placeholder="Masukkan jumlah uang..">
                                 </div>
@@ -247,10 +271,10 @@
                                 <span class="text-muted d-block mt-2" style="font-size: 0.75rem;">Scan menggunakan GoPay, OVO, Dana, BCA, atau Mobile Banking lainnya</span>
                             </div>
 
-                            {{-- Tombol Checkout (Awalnya tersembunyi d-none sampai metode dipilih) --}}
+                            {{-- Tombol Checkout (Tema Cokelat) --}}
                             <div class="d-grid gap-2 d-none mb-3" id="checkoutButtonSection">
-                                <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #20c997;">
-                                    <i class="bi bi-check-circle me-1"></i> Checkout Sekarang (Selesai)
+                                <button type="submit" class="btn fw-bold shadow-sm py-2 rounded-pill text-white border-0" style="background-color: #4e342e;">
+                                    <i class="bi bi-check-circle me-1"></i> Selesaikan Transaksi (Checkout)
                                 </button>
                             </div>
                         </form>
@@ -301,7 +325,7 @@
     </div>
 </div>
 
-{{-- Skrip Interaksi Dinamis Metode Pembayaran --}}
+{{-- Skrip Interaksi Dinamis Metode Pembayaran & Diskon --}}
 <script>
     let timer;
     const inputSearch = document.getElementById('inputSearchProduk');
@@ -342,7 +366,8 @@
     });
 
     document.getElementById('uangDiberikan')?.addEventListener('input', function() {
-        const total = parseFloat(document.getElementById('totalPembayaranValue').getAttribute('data-total')) || 0;
+        const totalElem = document.getElementById('totalPembayaranValue');
+        const total = totalElem ? parseFloat(totalElem.getAttribute('data-total')) || 0 : 0;
         const bayar = parseFloat(this.value) || 0;
         const kembalian = bayar - total;
 
