@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'SoleStation POS - Koleksi Sepatu')
+@section('title', 'SoleStation POS - Koleksi Sepatu & Sandal')
 
 @section('content')
 
@@ -55,6 +55,19 @@
     }
     .product-card:hover {
         transform: translateY(-5px);
+    }
+    .badge-best-seller {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: #d88ca0;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 5px 12px;
+        border-radius: 50px;
+        z-index: 2;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
     .btn-main-buy {
         background-color: #3d3b40;
@@ -131,10 +144,76 @@
     <header class="hero-section px-3">
         <div>
             <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Melangkah dengan Elegan & Penuh Gaya</h1>
-            <p class="lead mb-4" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Temukan koleksi sepatu impian terbaik dengan kualitas terkurasi hanya untukmu.</p>
+            <p class="lead mb-4" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">Temukan koleksi sepatu & sandal impian terbaik dengan kualitas terkurasi hanya untukmu.</p>
             <a href="javascript:void(0);" onclick="document.getElementById('katalog').scrollIntoView({behavior: 'smooth'});" class="btn btn-custom-shop shadow-lg">Jelajahi Koleksi</a>
         </div>
     </header>
+
+    {{-- Bagian Produk Best Seller (Berisi 3 Item: Puma, Heels, & Sandal Baru) --}}
+    <section class="container py-5 my-3">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: #d88ca0; font-family: 'Comic Sans MS', cursive, sans-serif;">Produk Best Seller</h2>
+            <p class="text-muted small">Pilihan teratas yang paling diminati dan diburu oleh pelanggan setia kami</p>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
+            
+            {{-- Best Seller 1: Puma Speedcat Archive Red --}}
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                        <span class="badge-best-seller">BEST SELLER 1</span>
+                        <img src="{{ asset('images/puma.jpg') }}" class="card-img-top rounded-4" alt="Puma Speedcat Red" style="height: 210px; object-fit: cover;">
+                    </div>
+                    <div class="card-body px-1 py-3 text-start">
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Puma Speedcat Archive Red</h6>
+                        <p class="fw-bold mb-2" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.450.000</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top text-muted" style="font-size: 0.85rem;">
+                            <span><i class="bi bi-bag-check-fill text-success me-1"></i> Terjual: <b>125 pcs</b></span>
+                            <span class="badge bg-light text-dark border">Stok: <b>12 pcs</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Best Seller 2: Polka Maroon Block Heels --}}
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                        <span class="badge-best-seller">BEST SELLER 2</span>
+                        <img src="{{ asset('images/flatshoes.jpg') }}" class="card-img-top rounded-4" alt="Polka Maroon Block Heels" style="height: 210px; object-fit: cover;">
+                    </div>
+                    <div class="card-body px-1 py-3 text-start">
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Polka Maroon Block Heels</h6>
+                        <p class="fw-bold mb-2" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.750.000</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top text-muted" style="font-size: 0.85rem;">
+                            <span><i class="bi bi-bag-check-fill text-success me-1"></i> Terjual: <b>98 pcs</b></span>
+                            <span class="badge bg-light text-dark border">Stok: <b>8 pcs</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Best Seller 3: Sandal Baru (Lanoes Bow Sandals Brown) --}}
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                        <span class="badge-best-seller">BEST SELLER 3</span>
+                        <img src="{{ asset('images/sandal.jpg') }}" class="card-img-top rounded-4" alt="Lanoes Bow Sandals Brown" style="height: 210px; object-fit: cover;">
+                    </div>
+                    <div class="card-body px-1 py-3 text-start">
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Lanoes Bow Sandals Brown</h6>
+                        <p class="fw-bold mb-2" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 950.000</p>
+                        <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top text-muted" style="font-size: 0.85rem;">
+                            <span><i class="bi bi-bag-check-fill text-success me-1"></i> Terjual: <b>150 pcs</b></span>
+                            <span class="badge bg-light text-dark border">Stok: <b>15 pcs</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     {{-- Katalog Produk --}}
     <section id="katalog" class="container py-5 my-4">
@@ -145,28 +224,28 @@
         
         <div class="row g-4 justify-content-center">
             
-            {{-- Produk 1 (Adidas Pink) --}}
+            {{-- Produk 1 (Vans Knu Skool Red) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="{{ asset('images/adidas.jpg') }}" class="card-img-top rounded-4" alt="Adidas Samba Pink" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/vans.jpg') }}" class="card-img-top rounded-4" alt="Vans Knu Skool Red" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Adidas Samba Pink Mary Jane</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 2.600.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Vans Knu Skool Red White</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.250.000</p>
                     </div>
                 </div>
             </div>
 
-            {{-- Produk 2 (Vans Kids Knu Skool) --}}
+            {{-- Produk 2 (Adidas Samba Pink Mary Jane) --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="card product-card h-100 p-3 border-0 shadow-sm rounded-4">
                     <div class="position-relative">
-                        <img src="{{ asset('images/vans.jpg') }}" class="card-img-top rounded-4" alt="Vans Kids Knu Skool" style="height: 210px; object-fit: cover;">
+                        <img src="{{ asset('images/adidas.jpg') }}" class="card-img-top rounded-4" alt="Adidas Samba Pink Mary Jane" style="height: 210px; object-fit: cover;">
                     </div>
                     <div class="card-body px-1 py-3 text-start">
-                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Vans Kids Knu Skool (Leopard Misty Mauve)</h6>
-                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 1.099.000</p>
+                        <h6 class="card-title fw-bold text-dark mb-2" style="font-size: 0.95rem; min-height: 40px;">Adidas Samba Pink Mary Jane</h6>
+                        <p class="fw-bold mb-0" style="color: #2b2b2b; font-size: 0.95rem;">Rp. 2.600.000</p>
                     </div>
                 </div>
             </div>
@@ -212,7 +291,7 @@
         <div class="about-section p-4 p-md-5 text-center">
             <h3 class="fw-bold mb-3" style="color: #d88ca0; font-family: 'Comic Sans MS', cursive, sans-serif;">Tentang SoleStation POS</h3>
             <p class="text-muted mx-auto" style="max-width: 750px; line-height: 1.8;">
-                **SoleStation POS** hadir sebagai destinasi utama bagi para pecinta fashion dan sneakers yang mengutamakan kenyamanan serta gaya. Kami menyediakan kurasi produk alas kaki terbaik mulai dari *high heels* elegan, *sneakers* kasual trendi, hingga model *coquette* menggemaskan yang dirancang khusus untuk menemani setiap langkah percaya dirimu. Melalui sistem pelayanan yang cepat dan terpercaya, kami siap memberikan pengalaman berbelanja terbaik untukmu setiap hari.
+                **SoleStation POS** hadir sebagai destinasi utama bagi para pecinta fashion dan sneakers yang mengutamakan kenyamanan serta gaya. Kami menyediakan kurasi produk alas kaki terbaik mulai dari *high heels* elegan, sandal pita yang manis, hingga *sneakers* kasual trendi yang dirancang khusus untuk menemani setiap langkah percaya dirimu. Melalui sistem pelayanan yang cepat dan terpercaya, kami siap memberikan pengalaman berbelanja terbaik untukmu setiap hari.
             </p>
         </div>
     </section>
@@ -225,7 +304,7 @@
                 <div class="col-12 col-md-4 offset-md-1">
                     <h5 class="fw-bold mb-3"><i class="bi bi-shop me-2"></i>SoleStation POS</h5>
                     <p class="text-muted small" style="line-height: 1.7;">
-                        Pusat perbelanjaan sepatu terkurasi dengan kualitas terbaik, menghadirkan gaya, kenyamanan, dan elegansi dalam setiap langkah Anda.
+                        Pusat perbelanjaan sepatu & sandal terkurasi dengan kualitas terbaik, menghadirkan gaya, kenyamanan, dan elegansi dalam setiap langkah Anda.
                     </p>
                     <div class="d-flex gap-2 mt-3">
                         <a href="#" class="social-icon" title="Instagram"><i class="bi bi-instagram"></i></a>
